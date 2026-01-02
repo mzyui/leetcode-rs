@@ -5,10 +5,3 @@ edition = "2024"
 
 [dependencies]
 
-[[bin]]
-name = "two-sum"
-path = "solutions/1.two-sum.rs"
-
-[[bin]]
-name = "add-two-numbers"
-path = "solutions/2.add-two-numbers.rs"
