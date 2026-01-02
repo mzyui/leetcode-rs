@@ -120,7 +120,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         ));
 
         out.push_str(&format!(
-            "**LeetCode:** https://leetcode.com/problems/{}/\n\n---\n\n",
+            "**LeetCode:** [Open problem on leetcode.com](https://leetcode.com/problems/{}/)\n\n---\n\n",
             p.slug
         ));
 

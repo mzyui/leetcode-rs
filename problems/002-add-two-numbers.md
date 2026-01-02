@@ -4,7 +4,7 @@
 **Difficulty:** Medium  
 **Acceptance:** 47.55582%
 
-**LeetCode:** https://leetcode.com/problems/add-two-numbers/
+**LeetCode:** [Open problem on leetcode.com](https://leetcode.com/problems/add-two-numbers/)
 
 ---
 

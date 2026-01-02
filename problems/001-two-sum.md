@@ -4,7 +4,7 @@
 **Difficulty:** Easy  
 **Acceptance:** 56.752426%
 
-**LeetCode:** https://leetcode.com/problems/two-sum/
+**LeetCode:** [Open problem on leetcode.com](https://leetcode.com/problems/two-sum/)
 
 ---
 
