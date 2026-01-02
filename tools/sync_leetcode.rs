@@ -1,16 +1,9 @@
-
 use std::{
     collections::HashSet,
     fs,
-    io::{self},
+    io,
     path::PathBuf,
 };
-
-#[derive(Debug, Hash, Eq, PartialEq)]
-struct Bin {
-    name: String,
-    path: String,
-}
 
 struct Problem {
     number: u32,
@@ -20,18 +13,16 @@ struct Problem {
     level: String,
     percent: String,
     description: String,
-    tests: Vec<(String, String)>,
     source: String,
 }
 
 fn main() -> io::Result<()> {
     let home = std::env::var("HOME").expect("HOME not set");
+
+    // ✅ Root folder renamed
     let root = PathBuf::from(home).join("leetcode-rs");
-
     let solutions_dir = root.join("solutions");
-    let cargo_toml = root.join("Cargo.toml");
 
-    let mut bins = HashSet::new();
     let mut problems = Vec::new();
 
     for entry in fs::read_dir(&solutions_dir)? {
@@ -51,17 +42,9 @@ fn main() -> io::Result<()> {
                 continue;
             }
 
-            if let Some(slug) = rest.strip_suffix(".rs") {
-                bins.insert(Bin {
-                    name: slug.to_string(),
-                    path: format!("solutions/{}", file),
-                });
-
-                let mut p = parse_problem(&path)?;
-                p.tests = parse_tests(&root.join(format!(
-                    "solutions/{}.{}.tests.dat",
-                    p.number, p.slug
-                )))?;
+            // ✅ no unused binding
+            if rest.ends_with(".rs") {
+                let p = parse_problem(&path)?;
                 problems.push(p);
             }
         }
@@ -74,54 +57,8 @@ fn main() -> io::Result<()> {
     cleanup_orphan_readmes(&problems, &root)?;
     generate_index_readme(&problems, &root)?;
 
-    write_bins(&cargo_toml, bins)?;
-
-    println!("sync_leetcode: DONE (solutions/ as source of truth)");
+    println!("sync_leetcode: DONE (docs-only mode)");
     Ok(())
-}
-
-/* ===================== Cargo.toml ===================== */
-
-fn write_bins(cargo_toml: &PathBuf, bins: HashSet<Bin>) -> io::Result<()> {
-    let original = fs::read_to_string(cargo_toml)?;
-    let mut cleaned = remove_existing_bins(&original);
-
-    cleaned = cleaned.trim_end().to_string();
-    cleaned.push('\n');
-
-    let mut bins: Vec<_> = bins.into_iter().collect();
-    bins.sort_by(|a, b| a.path.cmp(&b.path));
-
-    let mut out = cleaned;
-    for b in bins {
-        out.push_str(&format!(
-            "\n[[bin]]\nname = \"{}\"\npath = \"{}\"\n",
-            b.name, b.path
-        ));
-    }
-
-    fs::write(cargo_toml, out)
-}
-
-fn remove_existing_bins(input: &str) -> String {
-    let mut lines = Vec::new();
-    let mut skip = false;
-
-    for line in input.lines() {
-        if line.trim() == "[[bin]]" {
-            skip = true;
-            continue;
-        }
-        if skip {
-            if line.trim().is_empty() {
-                skip = false;
-            }
-            continue;
-        }
-        lines.push(line);
-    }
-
-    lines.join("\n")
 }
 
 /* ===================== Parsing ===================== */
@@ -162,27 +99,11 @@ fn parse_problem(path: &PathBuf) -> io::Result<Problem> {
         level,
         percent,
         description: desc.join("\n"),
-        tests: vec![],
         source: format!("solutions/{}.{}.rs", num, slug),
     })
 }
 
-fn parse_tests(path: &PathBuf) -> io::Result<Vec<(String, String)>> {
-    if !path.exists() {
-        return Ok(vec![]);
-    }
-
-    let content = fs::read_to_string(path)?;
-    let lines: Vec<_> = content.lines().collect();
-
-    Ok(lines
-        .chunks(2)
-        .filter(|c| c.len() == 2)
-        .map(|c| (c[0].to_string(), c[1].to_string()))
-        .collect())
-}
-
-/* ===================== README generation ===================== */
+/* ===================== README: per problem ===================== */
 
 fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let dir = root.join("problems");
@@ -192,30 +113,39 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
         let mut out = String::new();
 
-        // ===== Header =====
+        // Header
         out.push_str(&format!(
-            "# {}. {}\n\n**Category:** {}  \n**Difficulty:** {}  \n**Acceptance:** {}\n\n---\n\n",
+            "# {}. {}\n\n**Category:** {}  \n**Difficulty:** {}  \n**Acceptance:** {}\n\n",
             p.number, p.title, p.category, p.level, p.percent
         ));
 
-        // ===== Problem =====
+        out.push_str(&format!(
+            "**LeetCode:** https://leetcode.com/problems/{}/\n\n---\n\n",
+            p.slug
+        ));
+
         out.push_str("## Problem\n\n");
 
         let mut in_examples = false;
         let mut in_constraints = false;
         let mut example_count = 0;
-        let mut constraint_buffer = Vec::new();
+        let mut has_example_content = false;
+        let mut constraint_buffer: Vec<String> = Vec::new();
 
-        for raw_line in p.description.lines() {
-            let line = raw_line.trim();
+        for raw in p.description.lines() {
+            let line = raw.trim();
 
             if line.starts_with("Example") {
                 if !in_examples {
                     out.push_str("\n---\n\n## Examples\n\n");
                     in_examples = true;
                 }
+                if has_example_content {
+                    out.push('\n'); // space between examples
+                }
                 example_count += 1;
-                out.push_str(&format!("### Example {}\n\n", example_count));
+                out.push_str(&format!("### Example {}\n", example_count));
+                has_example_content = false;
                 continue;
             }
 
@@ -238,9 +168,9 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
                     || line.starts_with("Output:")
                     || line.starts_with("Explanation:")
                 {
-                    out.push_str("```text\n");
                     out.push_str(line);
-                    out.push_str("\n```\n\n");
+                    out.push_str("  \n"); // soft line break
+                    has_example_content = true;
                 }
                 continue;
             }
@@ -251,17 +181,19 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
         }
 
-        // flush constraints safely
+        // Constraints: rapat, satu baris per constraint
         if !constraint_buffer.is_empty() {
-            out.push_str("```text\n");
-            for l in constraint_buffer {
-                out.push_str(&l);
-                out.push('\n');
+            for (i, l) in constraint_buffer.iter().enumerate() {
+                out.push_str(l);
+                if i + 1 < constraint_buffer.len() {
+                    out.push_str("  \n");
+                } else {
+                    out.push('\n');
+                }
             }
-            out.push_str("```\n");
         }
 
-        // ===== Test data =====
+        // Test data link
         let test_path = format!("solutions/{}.{}.tests.dat", p.number, p.slug);
         if root.join(&test_path).exists() {
             out.push_str("\n---\n\n## Test Data\n\n");
@@ -271,7 +203,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             ));
         }
 
-        // ===== Source =====
+        // Source link
         out.push_str("\n---\n\n## Source / Solution\n\n");
         out.push_str(&format!(
             "- [{}](../{})\n",
@@ -283,6 +215,9 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
 
     Ok(())
 }
+
+
+/* ===================== README: cleanup ===================== */
 
 fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let dir = root.join("problems");
@@ -315,6 +250,8 @@ fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()
     Ok(())
 }
 
+/* ===================== README: index ===================== */
+
 fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let mut out = String::new();
 
@@ -331,40 +268,23 @@ fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()>
 
     out.push_str("\n---\n\n");
     out.push_str("## Tooling\n\n");
-    out.push_str("This repository uses a custom synchronization tool to keep binaries and documentation consistent.\n\n");
+    out.push_str("This repository uses a custom synchronization tool to keep solutions and documentation consistent.\n\n");
 
-    out.push_str("### Tools Used\n\n");
-    out.push_str("- **Rust** (stable toolchain)\n");
-    out.push_str("- **Cargo**\n");
-    out.push_str("- **rustc**\n");
-    out.push_str("- Custom synchronization tool: `tools/sync_leetcode.rs`\n\n");
-
-    out.push_str("### Tool Responsibilities\n\n");
-    out.push_str("- Register all `solutions/<no>.<slug>.rs` as Cargo binaries\n");
-    out.push_str("- Generate per-problem README under `problems/`\n");
-    out.push_str("- Generate this index README\n");
-    out.push_str("- Remove orphan documentation files (hard sync)\n\n");
-
-    out.push_str("---\n\n");
-    out.push_str("## How to Compile & Run the Tool\n\n");
+    out.push_str("### Usage\n\n");
     out.push_str("```bash\n");
-    out.push_str("cd ~/leetcode\n");
+    out.push_str("cd ~/leetcode-rs\n");
     out.push_str("rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode\n");
     out.push_str("./tools/sync_leetcode\n");
     out.push_str("```\n\n");
 
-    out.push_str("> Safe to run repeatedly. All outputs are deterministic.\n\n");
-
-    out.push_str("---\n\n");
-    out.push_str("## Credits\n\n");
-    out.push_str("Problem statements and test data were generated using:\n\n");
+    out.push_str("### Credits\n\n");
     out.push_str("- https://github.com/clearloop/leetcode-cli\n\n");
 
     out.push_str("---\n\n");
     out.push_str("## Source of Truth\n\n");
     out.push_str("- `solutions/*.rs`\n");
     out.push_str("- `solutions/*.tests.dat`\n\n");
-    out.push_str("Manual edits to generated README files will be overwritten.\n");
+    out.push_str("Generated files should not be edited manually.\n");
 
     fs::write(root.join("README.md"), out)
 }
