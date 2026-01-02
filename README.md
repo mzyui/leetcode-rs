@@ -9,39 +9,17 @@
 
 ## Tooling
 
-This repository uses a custom synchronization tool to keep binaries and documentation consistent.
+This repository uses a custom synchronization tool to keep solutions and documentation consistent.
 
-### Tools Used
-
-- **Rust** (stable toolchain)
-- **Cargo**
-- **rustc**
-- Custom synchronization tool: `tools/sync_leetcode.rs`
-
-### Tool Responsibilities
-
-- Register all `solutions/<no>.<slug>.rs` as Cargo binaries
-- Generate per-problem README under `problems/`
-- Generate this index README
-- Remove orphan documentation files (hard sync)
-
----
-
-## How to Compile & Run the Tool
+### Usage
 
 ```bash
-cd ~/leetcode
+cd ~/leetcode-rs
 rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 ./tools/sync_leetcode
 ```
 
-> Safe to run repeatedly. All outputs are deterministic.
-
----
-
-## Credits
-
-Problem statements and test data were generated using:
+### Credits
 
 - https://github.com/clearloop/leetcode-cli
 
@@ -52,4 +30,4 @@ Problem statements and test data were generated using:
 - `solutions/*.rs`
 - `solutions/*.tests.dat`
 
-Manual edits to generated README files will be overwritten.
+Generated files should not be edited manually.
