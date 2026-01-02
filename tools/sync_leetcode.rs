@@ -1,3 +1,4 @@
+
 use std::{
     collections::HashSet,
     fs,
@@ -200,12 +201,16 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         out.push_str(&p.description);
         out.push_str("\n\n---\n\n");
 
+        // 🔗 Link ke file test data (jika ada)
         if !p.tests.is_empty() {
-            out.push_str("## Test Cases\n\n| nums | target |\n|------|--------|\n");
-            for (n, t) in &p.tests {
-                out.push_str(&format!("| {} | {} |\n", n, t));
-            }
-            out.push_str("\n---\n\n");
+            out.push_str("## Test Cases\n\n");
+            out.push_str(&format!(
+                "- [{}](../solutions/{}.{}.tests.dat)\n\n",
+                format!("solutions/{}.{}.tests.dat", p.number, p.slug),
+                p.number,
+                p.slug
+            ));
+            out.push_str("---\n\n");
         }
 
         out.push_str("## Source / Solution\n\n");
@@ -219,6 +224,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
 
     Ok(())
 }
+
 
 fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let dir = root.join("problems");
@@ -273,8 +279,7 @@ fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()>
     out.push_str("- **Rust** (stable toolchain)\n");
     out.push_str("- **Cargo**\n");
     out.push_str("- **rustc**\n");
-    out.push_str("- Custom synchronization tool: `tools/sync_leetcode.rs`\n");
-    out.push_str("- LeetCode CLI: https://github.com/clearloop/leetcode-cli\n\n");
+    out.push_str("- Custom synchronization tool: `tools/sync_leetcode.rs`\n\n");
 
     out.push_str("### Tool Responsibilities\n\n");
     out.push_str("- Register all `solutions/<no>.<slug>.rs` as Cargo binaries\n");
@@ -319,4 +324,4 @@ fn title_case(slug: &str) -> String {
         })
         .collect::<Vec<_>>()
         .join(" ")
-}
+        }
