@@ -1,0 +1,14 @@
+[package]
+name = "leetcode"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+name = "two-sum"
+path = "src/1.two-sum.rs"
+
+[[bin]]
+name = "add-two-numbers"
+path = "src/2.add-two-numbers.rs"
