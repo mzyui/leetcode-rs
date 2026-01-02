@@ -11,6 +11,7 @@
 |---|--------|------------|----------|
 | 1 | [Two Sum](problems/001-two-sum.md) | Easy | algorithms |
 | 2 | [Add Two Numbers](problems/002-add-two-numbers.md) | Medium | algorithms |
+| 3 | [Longest Substring Without Repeating Characters](problems/003-longest-substring-without-repeating-characters.md) | Medium | algorithms |
 
 ---
 
