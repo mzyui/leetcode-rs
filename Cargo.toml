@@ -7,8 +7,8 @@ edition = "2024"
 
 [[bin]]
 name = "two-sum"
-path = "src/1.two-sum.rs"
+path = "solutions/1.two-sum.rs"
 
 [[bin]]
 name = "add-two-numbers"
-path = "src/2.add-two-numbers.rs"
+path = "solutions/2.add-two-numbers.rs"
