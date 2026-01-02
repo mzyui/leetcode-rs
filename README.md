@@ -17,7 +17,6 @@ This repository uses a custom synchronization tool to keep binaries and document
 - **Cargo**
 - **rustc**
 - Custom synchronization tool: `tools/sync_leetcode.rs`
-- LeetCode CLI: https://github.com/clearloop/leetcode-cli
 
 ### Tool Responsibilities
 

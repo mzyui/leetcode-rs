@@ -51,11 +51,7 @@ Follow-up: Can you come up with an algorithm that is less than O(n²) time com
 
 ## Test Cases
 
-| nums | target |
-|------|--------|
-| [2,7,11,15] | 9 |
-| [3,2,4] | 6 |
-| [3,3] | 6 |
+- [solutions/1.two-sum.tests.dat](../solutions/1.two-sum.tests.dat)
 
 ---
 

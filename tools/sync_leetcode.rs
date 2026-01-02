@@ -26,7 +26,7 @@ struct Problem {
 
 fn main() -> io::Result<()> {
     let home = std::env::var("HOME").expect("HOME not set");
-    let root = PathBuf::from(home).join("leetcode");
+    let root = PathBuf::from(home).join("leetcode-rs");
 
     let solutions_dir = root.join("solutions");
     let cargo_toml = root.join("Cargo.toml");
@@ -324,4 +324,4 @@ fn title_case(slug: &str) -> String {
         })
         .collect::<Vec<_>>()
         .join(" ")
-        }
+}

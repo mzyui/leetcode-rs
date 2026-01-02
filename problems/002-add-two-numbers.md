@@ -59,11 +59,7 @@ ListNode { next: None, val }
 
 ## Test Cases
 
-| nums | target |
-|------|--------|
-| [2,4,3] | [5,6,4] |
-| [0] | [0] |
-| [9,9,9,9,9,9,9] | [9,9,9,9] |
+- [solutions/2.add-two-numbers.tests.dat](../solutions/2.add-two-numbers.tests.dat)
 
 ---
 
