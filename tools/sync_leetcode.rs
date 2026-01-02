@@ -192,28 +192,87 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
         let mut out = String::new();
 
+        // ===== Header =====
         out.push_str(&format!(
             "# {}. {}\n\n**Category:** {}  \n**Difficulty:** {}  \n**Acceptance:** {}\n\n---\n\n",
             p.number, p.title, p.category, p.level, p.percent
         ));
 
+        // ===== Problem =====
         out.push_str("## Problem\n\n");
-        out.push_str(&p.description);
-        out.push_str("\n\n---\n\n");
 
-        // 🔗 Link ke file test data (jika ada)
-        if !p.tests.is_empty() {
-            out.push_str("## Test Cases\n\n");
-            out.push_str(&format!(
-                "- [{}](../solutions/{}.{}.tests.dat)\n\n",
-                format!("solutions/{}.{}.tests.dat", p.number, p.slug),
-                p.number,
-                p.slug
-            ));
-            out.push_str("---\n\n");
+        let mut in_examples = false;
+        let mut in_constraints = false;
+        let mut example_count = 0;
+        let mut constraint_buffer = Vec::new();
+
+        for raw_line in p.description.lines() {
+            let line = raw_line.trim();
+
+            if line.starts_with("Example") {
+                if !in_examples {
+                    out.push_str("\n---\n\n## Examples\n\n");
+                    in_examples = true;
+                }
+                example_count += 1;
+                out.push_str(&format!("### Example {}\n\n", example_count));
+                continue;
+            }
+
+            if line.starts_with("Constraints") {
+                out.push_str("\n---\n\n## Constraints\n\n");
+                in_constraints = true;
+                in_examples = false;
+                continue;
+            }
+
+            if in_constraints {
+                if !line.is_empty() {
+                    constraint_buffer.push(line.to_string());
+                }
+                continue;
+            }
+
+            if in_examples {
+                if line.starts_with("Input:")
+                    || line.starts_with("Output:")
+                    || line.starts_with("Explanation:")
+                {
+                    out.push_str("```text\n");
+                    out.push_str(line);
+                    out.push_str("\n```\n\n");
+                }
+                continue;
+            }
+
+            if !line.is_empty() {
+                out.push_str(line);
+                out.push_str("\n\n");
+            }
         }
 
-        out.push_str("## Source / Solution\n\n");
+        // flush constraints safely
+        if !constraint_buffer.is_empty() {
+            out.push_str("```text\n");
+            for l in constraint_buffer {
+                out.push_str(&l);
+                out.push('\n');
+            }
+            out.push_str("```\n");
+        }
+
+        // ===== Test data =====
+        let test_path = format!("solutions/{}.{}.tests.dat", p.number, p.slug);
+        if root.join(&test_path).exists() {
+            out.push_str("\n---\n\n## Test Data\n\n");
+            out.push_str(&format!(
+                "- [{}](../{})\n",
+                test_path, test_path
+            ));
+        }
+
+        // ===== Source =====
+        out.push_str("\n---\n\n## Source / Solution\n\n");
         out.push_str(&format!(
             "- [{}](../{})\n",
             p.source, p.source
@@ -224,7 +283,6 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
 
     Ok(())
 }
-
 
 fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let dir = root.join("problems");
