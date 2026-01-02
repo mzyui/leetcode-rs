@@ -18,8 +18,6 @@ struct Problem {
 
 fn main() -> io::Result<()> {
     let home = std::env::var("HOME").expect("HOME not set");
-
-    // ✅ Root folder renamed
     let root = PathBuf::from(home).join("leetcode-rs");
     let solutions_dir = root.join("solutions");
 
@@ -41,8 +39,6 @@ fn main() -> io::Result<()> {
             if !num.chars().all(|c| c.is_ascii_digit()) {
                 continue;
             }
-
-            // ✅ no unused binding
             if rest.ends_with(".rs") {
                 let p = parse_problem(&path)?;
                 problems.push(p);
@@ -50,9 +46,10 @@ fn main() -> io::Result<()> {
         }
     }
 
-    // canonical order
     problems.sort_by_key(|p| p.number);
 
+
+    generate_analysis_lib(&root, &problems)?;
     generate_problem_readmes(&problems, &root)?;
     cleanup_orphan_readmes(&problems, &root)?;
     generate_index_readme(&problems, &root)?;
@@ -103,6 +100,44 @@ fn parse_problem(path: &PathBuf) -> io::Result<Problem> {
     })
 }
 
+/* ===================== Auto-generate src/lib.rs ===================== */
+
+fn generate_analysis_lib(root: &PathBuf, problems: &[Problem]) -> io::Result<()> {
+    let src_dir = root.join("src");
+    fs::create_dir_all(&src_dir)?;
+
+    let lib_rs = src_dir.join("lib.rs");
+
+    let mut out = String::new();
+
+    out.push_str(r#"//! Analysis-only crate root.
+//!
+//! This file exists solely to enable IDE tooling (rust-analyzer).
+//! It includes all solution files for analysis purposes only.
+//!
+//! DO NOT use this crate for building or running code.
+
+#![allow(dead_code)]
+#![allow(unused_imports)]
+#![allow(non_snake_case)]
+#![allow(unused_variables)]
+
+mod solutions {
+"#);
+
+    for p in problems {
+        out.push_str(&format!(
+            "    include!(\"../{}\");\n",
+            p.source
+        ));
+    }
+
+    out.push_str("}\n");
+
+    fs::write(lib_rs, out)
+}
+
+
 /* ===================== README: per problem ===================== */
 
 fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
@@ -119,6 +154,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             p.number, p.title, p.category, p.level, p.percent
         ));
 
+        // Readable LeetCode link
         out.push_str(&format!(
             "**LeetCode:** [Open problem on leetcode.com](https://leetcode.com/problems/{}/)\n\n---\n\n",
             p.slug
@@ -181,7 +217,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
         }
 
-        // Constraints: rapat, satu baris per constraint
+        // Constraints: compact, one per line
         if !constraint_buffer.is_empty() {
             for (i, l) in constraint_buffer.iter().enumerate() {
                 out.push_str(l);
@@ -193,7 +229,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
         }
 
-        // Test data link
+        // Test data link (if exists)
         let test_path = format!("solutions/{}.{}.tests.dat", p.number, p.slug);
         if root.join(&test_path).exists() {
             out.push_str("\n---\n\n## Test Data\n\n");
@@ -215,7 +251,6 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
 
     Ok(())
 }
-
 
 /* ===================== README: cleanup ===================== */
 
