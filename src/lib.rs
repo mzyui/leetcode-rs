@@ -7,8 +7,8 @@
 
 #![allow(dead_code)]
 #![allow(unused_imports)]
-#![allow(non_snake_case)]
 #![allow(unused_variables)]
+#![allow(non_snake_case)]
 
 mod solutions {
     include!("../solutions/1.two-sum.rs");

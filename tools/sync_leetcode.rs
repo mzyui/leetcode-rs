@@ -23,6 +23,7 @@ fn main() -> io::Result<()> {
 
     let mut problems = Vec::new();
 
+    // Scan solutions/
     for entry in fs::read_dir(&solutions_dir)? {
         let path = entry?.path();
         if !path.is_file() {
@@ -34,7 +35,7 @@ fn main() -> io::Result<()> {
             None => continue,
         };
 
-        // match <number>.<slug>.rs
+        // <number>.<slug>.rs
         if let Some((num, rest)) = file.split_once('.') {
             if !num.chars().all(|c| c.is_ascii_digit()) {
                 continue;
@@ -48,13 +49,15 @@ fn main() -> io::Result<()> {
 
     problems.sort_by_key(|p| p.number);
 
-
+    // Enable rust-analyzer
     generate_analysis_lib(&root, &problems)?;
+
+    // Docs
     generate_problem_readmes(&problems, &root)?;
     cleanup_orphan_readmes(&problems, &root)?;
     generate_index_readme(&problems, &root)?;
 
-    println!("sync_leetcode: DONE (docs-only mode)");
+    println!("sync_leetcode: DONE");
     Ok(())
 }
 
@@ -100,16 +103,13 @@ fn parse_problem(path: &PathBuf) -> io::Result<Problem> {
     })
 }
 
-/* ===================== Auto-generate src/lib.rs ===================== */
+/* ===================== rust-analyzer anchor ===================== */
 
 fn generate_analysis_lib(root: &PathBuf, problems: &[Problem]) -> io::Result<()> {
     let src_dir = root.join("src");
     fs::create_dir_all(&src_dir)?;
 
-    let lib_rs = src_dir.join("lib.rs");
-
     let mut out = String::new();
-
     out.push_str(r#"//! Analysis-only crate root.
 //!
 //! This file exists solely to enable IDE tooling (rust-analyzer).
@@ -119,26 +119,22 @@ fn generate_analysis_lib(root: &PathBuf, problems: &[Problem]) -> io::Result<()>
 
 #![allow(dead_code)]
 #![allow(unused_imports)]
-#![allow(non_snake_case)]
 #![allow(unused_variables)]
+#![allow(non_snake_case)]
 
 mod solutions {
 "#);
 
     for p in problems {
-        out.push_str(&format!(
-            "    include!(\"../{}\");\n",
-            p.source
-        ));
+        out.push_str(&format!("    include!(\"../{}\");\n", p.source));
     }
 
     out.push_str("}\n");
 
-    fs::write(lib_rs, out)
+    fs::write(src_dir.join("lib.rs"), out)
 }
 
-
-/* ===================== README: per problem ===================== */
+/* ===================== problems markdown ===================== */
 
 fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let dir = root.join("problems");
@@ -148,13 +144,11 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
         let mut out = String::new();
 
-        // Header
         out.push_str(&format!(
             "# {}. {}\n\n**Category:** {}  \n**Difficulty:** {}  \n**Acceptance:** {}\n\n",
             p.number, p.title, p.category, p.level, p.percent
         ));
 
-        // Readable LeetCode link
         out.push_str(&format!(
             "**LeetCode:** [Open problem on leetcode.com](https://leetcode.com/problems/{}/)\n\n---\n\n",
             p.slug
@@ -165,8 +159,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         let mut in_examples = false;
         let mut in_constraints = false;
         let mut example_count = 0;
-        let mut has_example_content = false;
-        let mut constraint_buffer: Vec<String> = Vec::new();
+        let mut constraint_buf = Vec::new();
 
         for raw in p.description.lines() {
             let line = raw.trim();
@@ -176,12 +169,8 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
                     out.push_str("\n---\n\n## Examples\n\n");
                     in_examples = true;
                 }
-                if has_example_content {
-                    out.push('\n'); // space between examples
-                }
                 example_count += 1;
                 out.push_str(&format!("### Example {}\n", example_count));
-                has_example_content = false;
                 continue;
             }
 
@@ -192,21 +181,20 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
                 continue;
             }
 
-            if in_constraints {
-                if !line.is_empty() {
-                    constraint_buffer.push(line.to_string());
-                }
-                continue;
-            }
-
             if in_examples {
                 if line.starts_with("Input:")
                     || line.starts_with("Output:")
                     || line.starts_with("Explanation:")
                 {
                     out.push_str(line);
-                    out.push_str("  \n"); // soft line break
-                    has_example_content = true;
+                    out.push_str("  \n");
+                }
+                continue;
+            }
+
+            if in_constraints {
+                if !line.is_empty() {
+                    constraint_buf.push(line.to_string());
                 }
                 continue;
             }
@@ -217,34 +205,24 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
         }
 
-        // Constraints: compact, one per line
-        if !constraint_buffer.is_empty() {
-            for (i, l) in constraint_buffer.iter().enumerate() {
-                out.push_str(l);
-                if i + 1 < constraint_buffer.len() {
+        if !constraint_buf.is_empty() {
+            for (i, c) in constraint_buf.iter().enumerate() {
+                out.push_str(c);
+                if i + 1 < constraint_buf.len() {
                     out.push_str("  \n");
-                } else {
-                    out.push('\n');
                 }
             }
+            out.push('\n');
         }
 
-        // Test data link (if exists)
         let test_path = format!("solutions/{}.{}.tests.dat", p.number, p.slug);
         if root.join(&test_path).exists() {
             out.push_str("\n---\n\n## Test Data\n\n");
-            out.push_str(&format!(
-                "- [{}](../{})\n",
-                test_path, test_path
-            ));
+            out.push_str(&format!("- [{}](../{})\n", test_path, test_path));
         }
 
-        // Source link
         out.push_str("\n---\n\n## Source / Solution\n\n");
-        out.push_str(&format!(
-            "- [{}](../{})\n",
-            p.source, p.source
-        ));
+        out.push_str(&format!("- [{}](../{})\n", p.source, p.source));
 
         fs::write(path, out)?;
     }
@@ -252,7 +230,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
     Ok(())
 }
 
-/* ===================== README: cleanup ===================== */
+/* ===================== cleanup ===================== */
 
 fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let dir = root.join("problems");
@@ -260,37 +238,34 @@ fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()
         return Ok(());
     }
 
-    let expected: HashSet<String> = problems
+    let expected: HashSet<_> = problems
         .iter()
         .map(|p| format!("{:03}-{}.md", p.number, p.slug))
         .collect();
 
     for entry in fs::read_dir(&dir)? {
         let path = entry?.path();
-        if !path.is_file() {
-            continue;
-        }
-
-        let name = match path.file_name().and_then(|s| s.to_str()) {
-            Some(n) => n,
-            None => continue,
-        };
-
-        if !expected.contains(name) {
-            fs::remove_file(&path)?;
-            println!("Removed orphan README: {}", name);
+        if let Some(name) = path.file_name().and_then(|s| s.to_str()) {
+            if !expected.contains(name) {
+                fs::remove_file(path)?;
+            }
         }
     }
 
     Ok(())
 }
 
-/* ===================== README: index ===================== */
+/* ===================== README.md root ===================== */
 
 fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
     let mut out = String::new();
 
     out.push_str("# LeetCode Solutions (Rust)\n\n");
+    out.push_str("> This repository is documentation-focused.\n");
+    out.push_str("> Individual problems are documented under the `problems/` directory.\n\n");
+    out.push_str("![Rust](https://img.shields.io/badge/language-Rust-orange)\n\n");
+
+    out.push_str("## Index\n\n");
     out.push_str("| # | Problem | Difficulty | Category |\n");
     out.push_str("|---|--------|------------|----------|\n");
 
@@ -302,24 +277,48 @@ fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()>
     }
 
     out.push_str("\n---\n\n");
+    out.push_str("## Repository Structure\n\n");
+    out.push_str("```text\n");
+    out.push_str("leetcode-rs/\n");
+    out.push_str("├── solutions/        # Rust solutions (source of truth)\n");
+    out.push_str("├── problems/         # Auto-generated per-problem documentation\n");
+    out.push_str("├── tools/            # Synchronization tool\n");
+    out.push_str("├── src/              # Analysis-only crate root (rust-analyzer)\n");
+    out.push_str("├── Cargo.toml\n");
+    out.push_str("└── README.md\n");
+    out.push_str("```\n");
+
+    // ===== Tooling =====
+    out.push_str("\n---\n\n");
     out.push_str("## Tooling\n\n");
-    out.push_str("This repository uses a custom synchronization tool to keep solutions and documentation consistent.\n\n");
+    out.push_str("This repository uses a custom synchronization tool to keep solutions and documentation in sync.\n\n");
 
     out.push_str("### Usage\n\n");
     out.push_str("```bash\n");
     out.push_str("cd ~/leetcode-rs\n");
     out.push_str("rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode\n");
     out.push_str("./tools/sync_leetcode\n");
-    out.push_str("```\n\n");
+    out.push_str("```\n");
 
-    out.push_str("### Credits\n\n");
-    out.push_str("- https://github.com/clearloop/leetcode-cli\n\n");
+    // ===== Scope =====
+    out.push_str("\n---\n\n");
+    out.push_str("## Scope\n\n");
+    out.push_str("- This repository focuses on **clear and correct solutions**, not execution.\n");
+    out.push_str("- Solutions are written for learning and reference purposes.\n");
+    out.push_str("- There is no runtime, benchmarking, or online judge integration.\n");
+    out.push_str("- Documentation is auto-generated and kept in sync with source files.\n");
 
-    out.push_str("---\n\n");
-    out.push_str("## Source of Truth\n\n");
-    out.push_str("- `solutions/*.rs`\n");
-    out.push_str("- `solutions/*.tests.dat`\n\n");
-    out.push_str("Generated files should not be edited manually.\n");
+    // ===== Notes =====
+    out.push_str("\n---\n\n");
+    out.push_str("## Notes\n\n");
+    out.push_str("- `solutions/` is the single source of truth.\n");
+    out.push_str("- Files under `problems/` are auto-generated.\n");
+    out.push_str("- Manual edits to generated files will be overwritten.\n");
+
+    // ===== Credits =====
+    out.push_str("\n---\n\n");
+    out.push_str("## Credits\n\n");
+    out.push_str("- https://github.com/clearloop/leetcode-cli\n");
 
     fs::write(root.join("README.md"), out)
 }
