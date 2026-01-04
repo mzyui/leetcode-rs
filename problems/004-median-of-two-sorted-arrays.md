@@ -1,4 +1,3 @@
-<a id="problem-4"></a>
 # 4. Median Of Two Sorted Arrays
 
 **Category:** algorithms
@@ -9,7 +8,6 @@
 
 ---
 
-<a id="problem"></a>
 ## Problem
 
 Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
@@ -18,44 +16,46 @@ The overall run time complexity should be O(log (m+n)).
 
 ---
 
-<a id="examples"></a>
 ## Examples
 
 ### Example 1
-Input: nums1 = [1,3], nums2 = [2]
-Output: 2.00000
+
+Input: nums1 = [1,3], nums2 = [2]\
+Output: 2.00000\
 Explanation: merged array = [1,2,3] and median is 2.
+
 ### Example 2
-Input: nums1 = [1,2], nums2 = [3,4]
-Output: 2.50000
+
+Input: nums1 = [1,2], nums2 = [3,4]\
+Output: 2.50000\
 Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
 ---
 
-<a id="constraints"></a>
 ## Constraints
 
-nums1.length == m
-nums2.length == n
-0 <= m <= 1000
-0 <= n <= 1000
-1 <= m + n <= 2000
+nums1.length == m\
+nums2.length == n\
+0 <= m <= 1000\
+0 <= n <= 1000\
+1 <= m + n <= 2000\
 -10⁶ <= nums1[i], nums2[i] <= 10⁶
 
 ---
 
-<a id="test-data"></a>
 ## Test Data
 
 [solutions/4.median-of-two-sorted-arrays.tests.dat](../solutions/4.median-of-two-sorted-arrays.tests.dat)
 
 ---
 
-<a id="source--solution"></a>
 ## Source / Solution
 
 [solutions/4.median-of-two-sorted-arrays.rs](../solutions/4.median-of-two-sorted-arrays.rs)
 
 ---
 
+<small>
+
 [← Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md)
+</small>
