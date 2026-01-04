@@ -21,7 +21,7 @@ LeetCode problem per day.
 
 ## Quick Navigation
 
-- Problems 1–10
+- [Problems 1-10](#problems-1-10)
 
 ---
 
