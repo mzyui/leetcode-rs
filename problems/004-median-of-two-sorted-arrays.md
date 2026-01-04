@@ -1,3 +1,4 @@
+<a id="problem-4"></a>
 # 4. Median Of Two Sorted Arrays
 
 **Category:** algorithms
@@ -8,15 +9,16 @@
 
 ---
 
+<a id="problem"></a>
 ## Problem
 
 Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
 
 The overall run time complexity should be O(log (m+n)).
 
-
 ---
 
+<a id="examples"></a>
 ## Examples
 
 ### Example 1
@@ -30,6 +32,7 @@ Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
 ---
 
+<a id="constraints"></a>
 ## Constraints
 
 nums1.length == m
@@ -41,12 +44,18 @@ nums2.length == n
 
 ---
 
+<a id="test-data"></a>
 ## Test Data
 
-solutions/4.median-of-two-sorted-arrays.tests.dat
+[solutions/4.median-of-two-sorted-arrays.tests.dat](../solutions/4.median-of-two-sorted-arrays.tests.dat)
 
 ---
 
+<a id="source--solution"></a>
 ## Source / Solution
 
-solutions/4.median-of-two-sorted-arrays.rs
+[solutions/4.median-of-two-sorted-arrays.rs](../solutions/4.median-of-two-sorted-arrays.rs)
+
+---
+
+[← Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md)

@@ -1,3 +1,4 @@
+<a id="problem-2"></a>
 # 2. Add Two Numbers
 
 **Category:** algorithms
@@ -8,15 +9,16 @@
 
 ---
 
+<a id="problem"></a>
 ## Problem
 
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
-
 ---
 
+<a id="examples"></a>
 ## Examples
 
 ### Example 1
@@ -32,32 +34,43 @@ Output: [8,9,9,9,0,0,0,1]
 
 ---
 
+<a id="constraints"></a>
 ## Constraints
 
 The number of nodes in each linked list is in the range [1, 100].
 0 <= Node.val <= 9
 It is guaranteed that the list represents a number that does not have leading zeros.
 Definition for singly-linked list.
+```rust
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
 pub val: i32,
 pub next: Option<Box<ListNode>>,
 }
+```
+```rust
 impl ListNode {
 #[inline]
 fn new(val: i32) -> Self {
 ListNode { next: None, val }
 }
 }
+```
 
 ---
 
+<a id="test-data"></a>
 ## Test Data
 
-solutions/2.add-two-numbers.tests.dat
+[solutions/2.add-two-numbers.tests.dat](../solutions/2.add-two-numbers.tests.dat)
 
 ---
 
+<a id="source--solution"></a>
 ## Source / Solution
 
-solutions/2.add-two-numbers.rs
+[solutions/2.add-two-numbers.rs](../solutions/2.add-two-numbers.rs)
+
+---
+
+[← Previous](../problems/001-two-sum.md) · [Back to index](../README.md) · [Next →](../problems/003-longest-substring-without-repeating-characters.md)
