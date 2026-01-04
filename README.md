@@ -12,6 +12,7 @@
 | 1 | [Two Sum](problems/001-two-sum.md) | Easy | algorithms |
 | 2 | [Add Two Numbers](problems/002-add-two-numbers.md) | Medium | algorithms |
 | 3 | [Longest Substring Without Repeating Characters](problems/003-longest-substring-without-repeating-characters.md) | Medium | algorithms |
+| 4 | [Median Of Two Sorted Arrays](problems/004-median-of-two-sorted-arrays.md) | Hard | algorithms |
 
 ---
 

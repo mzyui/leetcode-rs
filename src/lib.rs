@@ -14,4 +14,5 @@ mod solutions {
     include!("../solutions/1.two-sum.rs");
     include!("../solutions/2.add-two-numbers.rs");
     include!("../solutions/3.longest-substring-without-repeating-characters.rs");
+    include!("../solutions/4.median-of-two-sorted-arrays.rs");
 }
