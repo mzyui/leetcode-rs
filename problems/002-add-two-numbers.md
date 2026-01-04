@@ -1,8 +1,8 @@
 # 2. Add Two Numbers
 
 **Category:** algorithms
-**Difficulty:** Medium
-**Acceptance:** 47.55582%
+\**Difficulty:** Medium
+\**Acceptance:** 47.55582%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/add-two-numbers/)
 
