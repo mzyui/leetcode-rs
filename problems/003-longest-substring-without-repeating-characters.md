@@ -1,8 +1,8 @@
 # 3. Longest Substring Without Repeating Characters
 
-**Category:** algorithms
-\**Difficulty:** Medium
-\**Acceptance:** 38.123196%
+**Category:** algorithms\
+**Difficulty:** Medium\
+**Acceptance:** 38.123196%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 

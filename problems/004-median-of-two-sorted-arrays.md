@@ -1,8 +1,8 @@
 # 4. Median Of Two Sorted Arrays
 
-**Category:** algorithms
-\**Difficulty:** Hard
-\**Acceptance:** 45.47212%
+**Category:** algorithms\
+**Difficulty:** Hard\
+**Acceptance:** 45.47212%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
