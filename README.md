@@ -1,9 +1,31 @@
 # LeetCode Solutions (Rust)
 
-> This repository is documentation-focused.
-> Individual problems are documented under the `problems/` directory.
+This repository contains a curated collection of LeetCode solutions written in Rust,
+with a focus on clarity, correctness, and maintainable documentation.
+
+The repository is updated daily as part of a personal challenge to solve one
+LeetCode problem per day.
+
+## Statistics
+
+- **Total problems:** 4
+- **Difficulty breakdown:**
+  - Easy: 1
+  - Medium: 2
+  - Hard: 1
+
+> This is a documentation-focused repository.  
+> Individual problems are documented in detail under the `problems/` directory.
 
 ![Rust](https://img.shields.io/badge/language-Rust-orange)
+
+## Quick Navigation
+
+- [Problems 1–10](#problems-1–10)
+
+---
+
+## Problems 1–10
 
 | # | Problem | Difficulty | Category |
 |---|--------|------------|----------|
@@ -12,20 +34,52 @@
 | 3 | [Longest Substring Without Repeating Characters](problems/003-longest-substring-without-repeating-characters.md) | Medium | algorithms |
 | 4 | [Median Of Two Sorted Arrays](problems/004-median-of-two-sorted-arrays.md) | Hard | algorithms |
 
+[Back to top](#leetcode-solutions-rust)
+
 ---
 
-## Scope
+## Repository Structure
 
-- Documentation-focused
+```text
+leetcode-rs/
+├── solutions/        # Original Rust solution files (source of truth)
+├── problems/         # Auto-generated per-problem documentation
+├── src/              # Analysis-only crate root (rust-analyzer)
+├── tools/            # Synchronization tooling
+├── Cargo.toml        # Minimal Cargo manifest
+└── README.md         # Repository overview
+```
+
+---
+
+## Tooling and Synchronization
+
+A custom synchronization tool (`sync_leetcode`) is used to keep solution
+files, documentation, and metadata in sync.
+
+```bash
+cd ~/leetcode-rs
+rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
+./tools/sync_leetcode
+./tools/sync_leetcode 100
+```
+
+---
+
+## Scope and Design Goals
+
+- Readable and idiomatic Rust solutions
 - No execution or benchmarking
-- Auto-generated documentation
+- Deterministic, auto-generated documentation
+- Strong IDE support via rust-analyzer
 
 ---
 
 ## Notes
 
-- `solutions/` is the source of truth
-- Generated files should not be edited manually
+- `solutions/` is the single source of truth
+- Files under `problems/` and `src/` are auto-generated
+- Manual edits to generated files will be overwritten
 
 ---
 
