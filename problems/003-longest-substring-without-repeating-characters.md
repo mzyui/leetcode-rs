@@ -4,7 +4,7 @@
 **Difficulty:** Medium
 **Acceptance:** 38.123196%
 
-**LeetCode:** https://leetcode.com/problems/longest-substring-without-repeating-characters/
+**LeetCode:** [View on LeetCode](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 
 ---
 

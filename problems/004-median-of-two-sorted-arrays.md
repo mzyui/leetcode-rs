@@ -4,7 +4,7 @@
 **Difficulty:** Hard
 **Acceptance:** 45.47212%
 
-**LeetCode:** https://leetcode.com/problems/median-of-two-sorted-arrays/
+**LeetCode:** [View on LeetCode](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
 ---
 
