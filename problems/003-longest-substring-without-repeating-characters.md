@@ -2,7 +2,7 @@
 
 **Category:** algorithms  
 **Difficulty:** Medium  
-**Acceptance:** 38.123196%
+**Acceptance Rate:** 38.123196%
 
 **LeetCode:** [Open problem on leetcode.com](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 
@@ -11,11 +11,6 @@
 ## Problem
 
 Given a string s, find the length of the longest substring without duplicate characters.
-
-
----
-
-## Examples
 
 ### Example 1
 Input: s = "abcabcbb"  
@@ -29,8 +24,6 @@ Explanation: The answer is "b", with the length of 1.
 Input: s = "pwwkew"  
 Output: 3  
 Explanation: The answer is "wke", with the length of 3.  
-
----
 
 ## Constraints
 
