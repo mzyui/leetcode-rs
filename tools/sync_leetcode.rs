@@ -323,7 +323,7 @@ LeetCode problem per day.\n\n",
         if !group.is_empty() {
             let end = start + bucket - 1;
             out.push_str(&format!(
-                "- [Problems {}–{}](#problems-{}–{})\n",
+                "- [Problems {}-{}](#problems-{}-{})\n",
                 start, end, start, end
             ));
         }
@@ -331,7 +331,10 @@ LeetCode problem per day.\n\n",
 
     for (start, group) in &buckets {
         let end = start + bucket - 1;
-        out.push_str(&format!("\n---\n\n## Problems {}–{}\n\n", start, end));
+        out.push_str(&format!(
+            "\n---\n\n<a id=\"problems-{}-{}\"></a>\n## Problems {}-{}\n\n",
+            start, end, start, end
+        ));
         out.push_str("| # | Problem | Difficulty | Category |\n");
         out.push_str("|---|--------|------------|----------|\n");
 
