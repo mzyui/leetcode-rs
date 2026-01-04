@@ -1,10 +1,10 @@
+use std::io::Write;
+use std::process::{Command, Stdio};
 use std::{
     collections::{BTreeMap, HashSet},
     fs, io,
     path::PathBuf,
 };
-use std::io::Write;
-use std::process::{Command, Stdio};
 
 fn format_with_rustfmt(code: &str) -> String {
     let mut child = match Command::new("rustfmt")
@@ -194,10 +194,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
         let mut out = String::new();
 
-        out.push_str(&format!(
-            "# {}. {}\n\n",
-            p.number, p.title
-        ));
+        out.push_str(&format!("# {}. {}\n\n", p.number, p.title));
 
         out.push_str(&format!(
             "**Category:** {}\n**Difficulty:** {}\n**Acceptance:** {}\n\n",
@@ -205,10 +202,9 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         ));
 
         out.push_str(&format!(
-            "**LeetCode:** https://leetcode.com/problems/{}/\n\n",
+            "**LeetCode:** [View on LeetCode](https://leetcode.com/problems/{}/)\n\n",
             p.slug
         ));
-
         out.push_str("---\n\n## Problem\n\n");
 
         let mut section = "problem";
@@ -221,10 +217,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
 
         for (idx, raw) in lines.iter().enumerate() {
             let line = raw.trim_start();
-            let next_line = lines
-                .get(idx + 1)
-                .map(|l| l.trim())
-                .unwrap_or("");
+            let next_line = lines.get(idx + 1).map(|l| l.trim()).unwrap_or("");
 
             let starts_code = looks_like_code(line);
 
@@ -529,7 +522,6 @@ fn looks_like_code(line: &str) -> bool {
         || l.starts_with("enum ")
         || l.starts_with("use ")
 }
-
 
 fn lint_markdown(input: &str) -> String {
     let mut out = String::new();
