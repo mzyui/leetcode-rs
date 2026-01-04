@@ -21,11 +21,12 @@ LeetCode problem per day.
 
 ## Quick Navigation
 
-- [Problems 1–10](#problems-1–10)
+- Problems 1–10
 
 ---
 
-## Problems 1–10
+<a id="problems-1-10"></a>
+## Problems 1-10
 
 | # | Problem | Difficulty | Category |
 |---|--------|------------|----------|
