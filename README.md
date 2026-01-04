@@ -5,8 +5,6 @@
 
 ![Rust](https://img.shields.io/badge/language-Rust-orange)
 
-## Index
-
 | # | Problem | Difficulty | Category |
 |---|--------|------------|----------|
 | 1 | [Two Sum](problems/001-two-sum.md) | Easy | algorithms |
@@ -16,48 +14,18 @@
 
 ---
 
-## Repository Structure
-
-```text
-leetcode-rs/
-├── solutions/        # Rust solutions (source of truth)
-├── problems/         # Auto-generated per-problem documentation
-├── tools/            # Synchronization tool
-├── src/              # Analysis-only crate root (rust-analyzer)
-├── Cargo.toml
-└── README.md
-```
-
----
-
-## Tooling
-
-This repository uses a custom synchronization tool to keep solutions and documentation in sync.
-
-### Usage
-
-```bash
-cd ~/leetcode-rs
-rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
-./tools/sync_leetcode
-```
-
----
-
 ## Scope
 
-- This repository focuses on **clear and correct solutions**, not execution.
-- Solutions are written for learning and reference purposes.
-- There is no runtime, benchmarking, or online judge integration.
-- Documentation is auto-generated and kept in sync with source files.
+- Documentation-focused
+- No execution or benchmarking
+- Auto-generated documentation
 
 ---
 
 ## Notes
 
-- `solutions/` is the single source of truth.
-- Files under `problems/` are auto-generated.
-- Manual edits to generated files will be overwritten.
+- `solutions/` is the source of truth
+- Generated files should not be edited manually
 
 ---
 
