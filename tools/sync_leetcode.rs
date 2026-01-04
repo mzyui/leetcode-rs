@@ -161,19 +161,17 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
     let dir = root.join("problems");
     fs::create_dir_all(&dir)?;
 
-    for p in problems {
+    for (i, p) in problems.iter().enumerate() {
         let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
         let mut out = String::new();
 
         out.push_str(&format!(
-            "# {}. {}\n\n",
-            p.number, p.title
+            "<a id=\"problem-{}\"></a>\n# {}. {}\n\n",
+            p.number, p.number, p.title
         ));
 
         out.push_str(&format!(
-            "**Category:** {}\n\
-**Difficulty:** {}\n\
-**Acceptance:** {}\n\n",
+            "**Category:** {}  \n**Difficulty:** {}  \n**Acceptance:** {}\n\n",
             p.category, p.level, p.percent
         ));
 
@@ -182,23 +180,27 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             p.slug
         ));
 
-        let mut in_examples = false;
-        let mut in_constraints = false;
+        out.push_str("---\n\n<a id=\"problem\"></a>\n## Problem\n\n");
+
+        let mut section = "problem";
         let mut example_idx = 0;
 
-        out.push_str("---\n\n## Problem\n\n");
+        let mut in_code = false;
+        let mut in_code_session = false;
+        let mut brace_depth: usize = 0;
 
         for raw in p.description.lines() {
-            let line = raw.trim();
-
-            if line.is_empty() {
-                continue;
-            }
+            let line = raw.trim_end();
+            let starts_code = looks_like_code(line);
 
             if line.starts_with("Example") {
-                if !in_examples {
-                    out.push_str("\n---\n\n## Examples\n\n");
-                    in_examples = true;
+                close_code(&mut out, &mut in_code);
+                in_code_session = false;
+                brace_depth = 0;
+
+                if section != "examples" {
+                    out.push_str("\n---\n\n<a id=\"examples\"></a>\n## Examples\n\n");
+                    section = "examples";
                 }
                 example_idx += 1;
                 out.push_str(&format!("### Example {}\n", example_idx));
@@ -206,43 +208,89 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
 
             if line.starts_with("Constraints") {
-                out.push_str("\n---\n\n## Constraints\n\n");
-                in_examples = false;
-                in_constraints = true;
+                close_code(&mut out, &mut in_code);
+                in_code_session = false;
+                brace_depth = 0;
+
+                out.push_str("\n---\n\n<a id=\"constraints\"></a>\n## Constraints\n\n");
+                section = "constraints";
                 continue;
             }
 
-            if in_examples {
-                if line.starts_with("Input:")
-                    || line.starts_with("Output:")
-                    || line.starts_with("Explanation:")
-                {
+            if starts_code && !in_code_session {
+                in_code_session = true;
+            }
+
+            if in_code_session {
+                if !in_code {
+                    out.push_str("```rust\n");
+                    in_code = true;
+                }
+
+                brace_depth += line.matches('{').count();
+                brace_depth = brace_depth.saturating_sub(line.matches('}').count());
+
+                out.push_str(line);
+                out.push('\n');
+
+                if brace_depth == 0 && !starts_code {
+                    in_code_session = false;
+                }
+
+                continue;
+            }
+
+            close_code(&mut out, &mut in_code);
+
+            match section {
+                "examples" | "constraints" => {
+                    if !line.is_empty() {
+                        out.push_str(line);
+                        out.push('\n');
+                    }
+                }
+                _ => {
                     out.push_str(line);
                     out.push('\n');
                 }
-                continue;
             }
-
-            if in_constraints {
-                out.push_str(line);
-                out.push('\n');
-                continue;
-            }
-
-            out.push_str(line);
-            out.push_str("\n\n");
         }
+
+        close_code(&mut out, &mut in_code);
 
         let test_path = format!("solutions/{}.{}.tests.dat", p.number, p.slug);
         if root.join(&test_path).exists() {
-            out.push_str("\n---\n\n## Test Data\n\n");
-            out.push_str(&format!("{}\n", test_path));
+            out.push_str("\n---\n\n<a id=\"test-data\"></a>\n## Test Data\n\n");
+            out.push_str(&format!("[{}](../{})\n", test_path, test_path));
         }
 
-        out.push_str("\n---\n\n## Source / Solution\n\n");
-        out.push_str(&format!("{}\n", p.source));
+        out.push_str("\n---\n\n<a id=\"source--solution\"></a>\n## Source / Solution\n\n");
+        out.push_str(&format!("[{}](../{})\n", p.source, p.source));
 
-        fs::write(path, out)?;
+        out.push_str("\n---\n\n");
+
+        if i > 0 {
+            let prev = &problems[i - 1];
+            out.push_str(&format!(
+                "[← Previous](../problems/{:03}-{}.md) · ",
+                prev.number, prev.slug
+            ));
+        }
+
+        out.push_str("[Back to index](../README.md)");
+
+        if i + 1 < problems.len() {
+            let next = &problems[i + 1];
+            out.push_str(&format!(
+                " · [Next →](../problems/{:03}-{}.md)",
+                next.number, next.slug
+            ));
+        }
+
+        out.push('\n');
+
+        let cleaned = lint_markdown(&out);
+        fs::write(path, cleaned)?;
     }
 
     Ok(())
@@ -421,4 +469,43 @@ fn title_case(slug: &str) -> String {
         })
         .collect::<Vec<_>>()
         .join(" ")
+}
+
+fn looks_like_code(line: &str) -> bool {
+    let l = line.trim_start();
+
+    l.starts_with("#[")
+        || l.starts_with("pub ")
+        || l.starts_with("struct ")
+        || l.starts_with("impl ")
+        || l.starts_with("fn ")
+        || l.starts_with("enum ")
+        || l.starts_with("use ")
+}
+
+fn close_code(out: &mut String, in_code: &mut bool) {
+    if *in_code {
+        out.push_str("```\n");
+        *in_code = false;
+    }
+}
+
+fn lint_markdown(input: &str) -> String {
+    let mut out = String::new();
+    let mut prev_blank = false;
+
+    for line in input.lines() {
+        let trimmed = line.trim_end();
+        let blank = trimmed.is_empty();
+
+        if blank && prev_blank {
+            continue;
+        }
+
+        out.push_str(trimmed);
+        out.push('\n');
+        prev_blank = blank;
+    }
+
+    out
 }
