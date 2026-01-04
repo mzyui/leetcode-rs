@@ -197,7 +197,7 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         out.push_str(&format!("# {}. {}\n\n", p.number, p.title));
 
         out.push_str(&format!(
-            "**Category:** {}\n\\**Difficulty:** {}\n\\**Acceptance:** {}\n\n",
+            "**Category:** {}\\\n**Difficulty:** {}\\\n**Acceptance:** {}\n\n",
             p.category, p.level, p.percent
         ));
 
