@@ -57,5 +57,5 @@ nums2.length == n\
 
 <small>
 
-[← Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md)
+[← Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md) · [Next →](../problems/005-longest-palindromic-substring.md)
 </small>
