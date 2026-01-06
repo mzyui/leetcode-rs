@@ -14,4 +14,5 @@ mod solutions {
     include!("../solutions/3.longest-substring-without-repeating-characters.rs");
     include!("../solutions/4.median-of-two-sorted-arrays.rs");
     include!("../solutions/5.longest-palindromic-substring.rs");
+    include!("../solutions/6.zigzag-conversion.rs");
 }

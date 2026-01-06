@@ -50,5 +50,5 @@ s consist of only digits and English letters.
 
 <small>
 
-[← Previous](../problems/004-median-of-two-sorted-arrays.md) · [Back to index](../README.md)
+[← Previous](../problems/004-median-of-two-sorted-arrays.md) · [Back to index](../README.md) · [Next →](../problems/006-zigzag-conversion.md)
 </small>
