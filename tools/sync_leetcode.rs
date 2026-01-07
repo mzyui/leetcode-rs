@@ -350,11 +350,12 @@ fn generate_problem_readmes(
             FileType::Index => {
                 if let Some(code) = generate_solution_hint(&root.join(&p.source))? {
                     out.push_str(
-                        "<details>\n\n<summary>Click to reveal solution hint</summary>\n\n",
+                        "<details>\n<summary>Click to reveal solution hint</summary>\n\n",
                     );
-                    out.push_str("```rust\n");
-                    out.push_str(&code);
-                    out.push_str("\n```\n\n</details>\n");
+
+                    out.push_str("<pre><code class=\"language-rust\">\n");
+                    out.push_str(&html_escape(&code));
+                    out.push_str("\n</code></pre>\n\n</details>\n");
                 }
                 out.push_str("\n---\n\n<small>[Back to index](../)</small>\n")
             }
@@ -375,6 +376,12 @@ fn generate_problem_readmes(
     }
 
     Ok(())
+}
+
+fn html_escape(s: &str) -> String {
+    s.replace('&', "&amp;")
+     .replace('<', "&lt;")
+     .replace('>', "&gt;")
 }
 
 fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Option<String>) {
@@ -569,6 +576,12 @@ with a focus on clarity, correctness, and maintainable documentation.\n\n\
 The repository is updated daily as part of a personal challenge to solve one\n\
 LeetCode problem per day.\n\n",
     );
+
+    if filetype == FileType::Readme {
+        out.push_str(
+            "A browsable web version of this repository is available on the [project website](https://mzyui.github.io/leetcode-rs/).\n\n"
+        );
+    }
 
     out.push_str("## Statistics\n\n");
     out.push_str(&format!(
