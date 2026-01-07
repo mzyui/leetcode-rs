@@ -46,6 +46,7 @@ LeetCode problem per day.
 
 ```text
 leetcode-rs/
+├── docs/             # Auto-generated documentation
 ├── solutions/        # Original Rust solution files (source of truth)
 ├── problems/         # Auto-generated per-problem documentation
 ├── src/              # Analysis-only crate root (rust-analyzer)
