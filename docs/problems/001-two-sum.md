@@ -58,15 +58,15 @@ You can return the answer in any order.
 <details>
 <summary>Click to reveal solution hint</summary>
 
-<pre><code class="language-rust">
+{% highlight rust %}
 impl Solution {
-    pub fn two_sum(nums: Vec&lt;i32&gt;, target: i32) -&gt; Vec&lt;i32&gt; {
-        let mut map: HashMap&lt;i32, i32&gt; = HashMap::new();
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+        let mut map: HashMap<i32, i32> = HashMap::new();
 
-        for (i, &amp;num) in nums.iter().enumerate() {
+        for (i, &num) in nums.iter().enumerate() {
             let complement = target - num;
 
-            if let Some(&amp;index) = map.get(&amp;complement) {
+            if let Some(&index) = map.get(&complement) {
                 return vec![index, i as i32];
             }
 
@@ -76,9 +76,7 @@ impl Solution {
         vec![]
     }
 }
-</code></pre>
-
-</details>
+{% endhighlight %}
 
 ---
 

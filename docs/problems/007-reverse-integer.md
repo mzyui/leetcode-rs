@@ -50,23 +50,21 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 <details>
 <summary>Click to reveal solution hint</summary>
 
-<pre><code class="language-rust">
+{% highlight rust %}
 impl Solution {
-    pub fn reverse(mut x: i32) -&gt; i32 {
+    pub fn reverse(mut x: i32) -> i32 {
         let mut r = 0;
         while x != 0 {
             let d = x % 10;
             x /= 10;
-            if r &gt; 214748364 || (r == 214748364 &amp;&amp; d &gt; 7) { return 0; }
-            if r &lt; -214748364 || (r == -214748364 &amp;&amp; d &lt; -8) { return 0; }
+            if r > 214748364 || (r == 214748364 && d > 7) { return 0; }
+            if r < -214748364 || (r == -214748364 && d < -8) { return 0; }
             r = r * 10 + d;
         }
         r
     }
 }
-</code></pre>
-
-</details>
+{% endhighlight %}
 
 ---
 

@@ -53,9 +53,9 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 <details>
 <summary>Click to reveal solution hint</summary>
 
-<pre><code class="language-rust">
+{% highlight rust %}
 impl Solution {
-    pub fn length_of_longest_substring(s: String) -&gt; i32 {
+    pub fn length_of_longest_substring(s: String) -> i32 {
         let bytes = s.as_bytes();
         let mut last = [-1; 128];
         let mut left = 0;
@@ -64,7 +64,7 @@ impl Solution {
         for right in 0..bytes.len() {
             let c = bytes[right] as usize;
 
-            if last[c] &gt;= left {
+            if last[c] >= left {
                 left = last[c] + 1;
             }
 
@@ -75,9 +75,7 @@ impl Solution {
         max_len
     }
 }
-</code></pre>
-
-</details>
+{% endhighlight %}
 
 ---
 

@@ -353,9 +353,10 @@ fn generate_problem_readmes(
                         "<details>\n<summary>Click to reveal solution hint</summary>\n\n",
                     );
 
-                    out.push_str("<pre><code class=\"language-rust\">\n");
-                    out.push_str(&html_escape(&code));
-                    out.push_str("\n</code></pre>\n\n</details>\n");
+out.push_str("{% highlight rust %}\n");
+out.push_str(&code);
+out.push_str("\n{% endhighlight %}\n");
+
                 }
                 out.push_str("\n---\n\n<small>[Back to index](../)</small>\n")
             }
@@ -378,11 +379,6 @@ fn generate_problem_readmes(
     Ok(())
 }
 
-fn html_escape(s: &str) -> String {
-    s.replace('&', "&amp;")
-     .replace('<', "&lt;")
-     .replace('>', "&gt;")
-}
 
 fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Option<String>) {
     if constraints.is_empty() && follow_up.is_none() {
