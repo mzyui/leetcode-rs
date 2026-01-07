@@ -117,7 +117,40 @@ Reading stops at the first non-digit character 'w'.
 {% highlight rust %}
 impl Solution {
     pub fn my_atoi(s: String) -> i32 {
+        let mut res: i32 = 0;
+        let mut sign: i32 = 1;
+        let mut started = false;
 
+        for c in s.chars() {
+            if !started {
+                if c == ' ' {
+                    continue;
+                } else if c == '-' {
+                    sign = -1;
+                    started = true;
+                } else if c == '+' {
+                    started = true;
+                } else if c.is_ascii_digit() {
+                    started = true;
+                    res = c as i32 - '0' as i32;
+                } else {
+                    return 0;
+                }
+            } else {
+                if !c.is_ascii_digit() {
+                    break;
+                }
+                let digit = c as i32 - '0' as i32;
+
+                if res > i32::MAX / 10 || (res == i32::MAX / 10 && digit > 7) {
+                    return if sign == 1 { i32::MAX } else { i32::MIN };
+                }
+
+                res = res * 10 + digit;
+            }
+        }
+
+        sign * res
     }
 }
 {% endhighlight %}
