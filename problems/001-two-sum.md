@@ -40,12 +40,12 @@ Output: [0,1]
 
 ## Constraints
 
-2 <= nums.length <= 10⁴\
--10⁹ <= nums[i] <= 10⁹\
--10⁹ <= target <= 10⁹\
-Only one valid answer exists.
+- 2 <= nums.length <= 10⁴
+- -10⁹ <= nums[i] <= 10⁹
+- -10⁹ <= target <= 10⁹
+- Only one valid answer exists.
 
-Follow-up: Can you come up with an algorithm that is less than O(n²) time complexity?
+- Follow-up: Can you come up with an algorithm that is less than O(n²) time complexity?
 
 ---
 
