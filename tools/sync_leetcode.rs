@@ -1,4 +1,5 @@
 use std::io::Write;
+use std::path::Path;
 use std::process::{Command, Stdio};
 use std::{
     collections::{BTreeMap, HashSet},
@@ -42,6 +43,12 @@ struct Problem {
     percent: String,
     description: String,
     source: String,
+}
+
+#[derive(PartialEq)]
+enum FileType {
+    Index,
+    Readme,
 }
 
 fn parse_range() -> Option<(Option<u32>, Option<u32>)> {
@@ -112,9 +119,12 @@ fn main() -> io::Result<()> {
     problems.sort_by_key(|p| p.number);
 
     generate_analysis_lib(&root, &problems)?;
-    generate_problem_readmes(&problems, &root)?;
+    generate_problem_readmes(&problems, &root, FileType::Readme)?;
+    generate_problem_readmes(&problems, &root, FileType::Index)?;
+
     cleanup_orphan_readmes(&problems, &root)?;
-    generate_index_readme(&problems, &root)?;
+    generate_index_readme(&problems, &root, FileType::Readme)?;
+    generate_index_readme(&problems, &root, FileType::Index)?;
 
     Ok(())
 }
@@ -186,17 +196,21 @@ mod solutions {
     fs::write(src.join("lib.rs"), out)
 }
 
-fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
-    let dir = root.join("problems");
-    fs::create_dir_all(&dir)?;
-
-    for (_i, p) in problems.iter().enumerate() {
-        let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
+fn generate_problem_readmes(
+    problems: &[Problem],
+    root: &PathBuf,
+    filetype: FileType,
+) -> io::Result<()> {
+    for p in problems.iter() {
         let mut out = String::new();
+
+        if filetype == FileType::Index {
+            out.push_str(&format!("---\ntitle: {}\n---\n\n", p.title));
+        }
 
         out.push_str(&format!("# {}. {}\n\n", p.number, p.title));
         out.push_str(&format!(
-            "**Category:** {}\n**Difficulty:** {}\n**Acceptance:** {}\n\n",
+            "**Category:** {}\\\n**Difficulty:** {}\\\n**Acceptance:** {}\n\n",
             p.category, p.level, p.percent
         ));
         out.push_str(&format!(
@@ -327,11 +341,37 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
         }
 
         out.push_str("\n---\n\n## Source / Solution\n\n");
-        out.push_str(&format!("[{}](../{})\n", p.source, p.source));
 
-        out.push_str("\n---\n\n<small>[Back to index](../README.md)</small>\n");
+        match filetype {
+            FileType::Readme => {
+                out.push_str(&format!("[{}](../{})\n", p.source, p.source));
+                out.push_str("\n---\n\n<small>[Back to index](../README.md)</small>\n")
+            }
+            FileType::Index => {
+                if let Some(code) = generate_solution_hint(&root.join(&p.source))? {
+                    out.push_str(
+                        "<details>\n\n<summary>Click to reveal solution hint</summary>\n\n",
+                    );
+                    out.push_str("```rust\n");
+                    out.push_str(&code);
+                    out.push_str("\n```\n\n</details>\n");
+                }
+                out.push_str("\n---\n\n<small>[Back to index](../)</small>\n")
+            }
+        }
 
-        fs::write(path, lint_markdown(&out))?;
+        match filetype {
+            FileType::Readme => {
+                let path = root.join(format!("problems/{:03}-{}.md", p.number, p.slug));
+                fs::write(path, lint_markdown(&out))?;
+            }
+            FileType::Index => {
+                let path = root
+                    .clone()
+                    .join(format!("docs/problems/{:03}-{}.md", p.number, p.slug));
+                fs::write(path, lint_markdown(&out))?;
+            }
+        }
     }
 
     Ok(())
@@ -489,7 +529,11 @@ fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()
     Ok(())
 }
 
-fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
+fn generate_index_readme(
+    problems: &[Problem],
+    root: &PathBuf,
+    filetype: FileType,
+) -> io::Result<()> {
     let bucket = bucket_size(problems.len());
 
     let total = problems.len();
@@ -513,6 +557,10 @@ fn generate_index_readme(problems: &[Problem], root: &PathBuf) -> io::Result<()>
     }
 
     let mut out = String::new();
+
+    if filetype == FileType::Index {
+        out.push_str("---\ntitle: leetcode-rs\n---\n\n");
+    }
 
     out.push_str("# LeetCode Solutions (Rust)\n\n");
     out.push_str(
@@ -560,12 +608,21 @@ LeetCode problem per day.\n\n",
         g.sort_by_key(|p| p.number);
 
         for p in g {
-            out.push_str(&format!(
-                "| {} | [{}](problems/{:03}-{}.md) | {} | {} |\n",
-                p.number, p.title, p.number, p.slug, p.level, p.category
-            ));
+            match filetype {
+                FileType::Readme => {
+                    out.push_str(&format!(
+                        "| {} | [{}](problems/{:03}-{}.md) | {} | {} |\n",
+                        p.number, p.title, p.number, p.slug, p.level, p.category
+                    ));
+                }
+                FileType::Index => {
+                    out.push_str(&format!(
+                        "| {} | [{}](problems/{:03}-{}) | {} | {} |\n",
+                        p.number, p.title, p.number, p.slug, p.level, p.category
+                    ));
+                }
+            }
         }
-
         out.push_str("\n[Back to top](#leetcode-solutions-rust)\n");
     }
 
@@ -573,6 +630,7 @@ LeetCode problem per day.\n\n",
     out.push_str(
         "```text\n\
 leetcode-rs/\n\
+├── docs/             # Auto-generated documentation\n\
 ├── solutions/        # Original Rust solution files (source of truth)\n\
 ├── problems/         # Auto-generated per-problem documentation\n\
 ├── src/              # Analysis-only crate root (rust-analyzer)\n\
@@ -626,7 +684,10 @@ respective owners.\n",
     out.push_str("\n---\n\n");
     out.push_str("*Auto-generated by `sync_leetcode`. Manual changes may be overwritten.*\n");
 
-    fs::write(root.join("README.md"), out)
+    match filetype {
+        FileType::Readme => fs::write(root.join("README.md"), out),
+        FileType::Index => fs::write(root.join("docs/index.md"), out),
+    }
 }
 
 fn title_case(slug: &str) -> String {
@@ -683,5 +744,108 @@ fn emphasize_example_labels(line: &str) -> String {
         format!("**Explanation:**{}", rest)
     } else {
         line.to_string()
+    }
+}
+
+fn strip_rust_comments(src: &str) -> String {
+    let mut out = String::new();
+    let mut chars = src.chars().peekable();
+
+    let mut in_block_comment = false;
+    let mut in_string = false;
+
+    while let Some(c) = chars.next() {
+        if in_block_comment {
+            if c == '*' && chars.peek() == Some(&'/') {
+                chars.next();
+                in_block_comment = false;
+            }
+            continue;
+        }
+
+        if in_string {
+            out.push(c);
+            if c == '"' {
+                in_string = false;
+            }
+            continue;
+        }
+
+        if c == '"' {
+            in_string = true;
+            out.push(c);
+            continue;
+        }
+
+        if c == '/' {
+            match chars.peek() {
+                Some('/') => {
+                    // line comment → skip till newline
+                    while let Some(nc) = chars.next() {
+                        if nc == '\n' {
+                            out.push('\n');
+                            break;
+                        }
+                    }
+                    continue;
+                }
+                Some('*') => {
+                    chars.next();
+                    in_block_comment = true;
+                    continue;
+                }
+                _ => {}
+            }
+        }
+
+        out.push(c);
+    }
+
+    out
+}
+
+fn extract_solution_impl(src: &str) -> Option<String> {
+    let mut lines = src.lines();
+    let mut buf = String::new();
+    let mut in_impl = false;
+    let mut brace_depth = 0;
+
+    while let Some(line) = lines.next() {
+        if !in_impl {
+            if line.trim_start().starts_with("impl Solution") {
+                in_impl = true;
+            } else {
+                continue;
+            }
+        }
+
+        if in_impl {
+            brace_depth += line.matches('{').count() as isize;
+            brace_depth -= line.matches('}').count() as isize;
+
+            buf.push_str(line);
+            buf.push('\n');
+
+            if brace_depth == 0 {
+                break;
+            }
+        }
+    }
+
+    if buf.is_empty() {
+        None
+    } else {
+        Some(buf)
+    }
+}
+
+fn generate_solution_hint(solution_path: &Path) -> io::Result<Option<String>> {
+    let src = fs::read_to_string(solution_path)?;
+    let no_comments = strip_rust_comments(&src);
+
+    if let Some(code) = extract_solution_impl(&no_comments) {
+        Ok(Some(code.trim().to_string()))
+    } else {
+        Ok(None)
     }
 }
