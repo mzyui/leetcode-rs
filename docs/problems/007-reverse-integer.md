@@ -1,3 +1,7 @@
+---
+title: Reverse Integer
+---
+
 # 7. Reverse Integer
 
 **Category:** algorithms\

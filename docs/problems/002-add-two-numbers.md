@@ -1,3 +1,7 @@
+---
+title: Add Two Numbers
+---
+
 # 2. Add Two Numbers
 
 **Category:** algorithms\

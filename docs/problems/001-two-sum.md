@@ -1,3 +1,7 @@
+---
+title: Two Sum
+---
+
 # 1. Two Sum
 
 **Category:** algorithms\

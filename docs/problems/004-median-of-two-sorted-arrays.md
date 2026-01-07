@@ -1,3 +1,7 @@
+---
+title: Median Of Two Sorted Arrays
+---
+
 # 4. Median Of Two Sorted Arrays
 
 **Category:** algorithms\
