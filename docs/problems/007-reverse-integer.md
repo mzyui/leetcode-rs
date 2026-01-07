@@ -48,6 +48,7 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 ## Source / Solution
 
 <details>
+
 <summary>Click to reveal solution hint</summary>
 
 ```rust

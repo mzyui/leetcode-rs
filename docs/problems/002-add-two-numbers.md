@@ -67,6 +67,7 @@ impl ListNode {
 ## Source / Solution
 
 <details>
+
 <summary>Click to reveal solution hint</summary>
 
 ```rust

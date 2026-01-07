@@ -56,6 +56,7 @@ You can return the answer in any order.
 ## Source / Solution
 
 <details>
+
 <summary>Click to reveal solution hint</summary>
 
 ```rust

@@ -43,6 +43,7 @@ Given a string s, return the longest palindromic substring in s.
 ## Source / Solution
 
 <details>
+
 <summary>Click to reveal solution hint</summary>
 
 ```rust

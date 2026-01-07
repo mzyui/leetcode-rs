@@ -51,6 +51,7 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 ## Source / Solution
 
 <details>
+
 <summary>Click to reveal solution hint</summary>
 
 ```rust
