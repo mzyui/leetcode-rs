@@ -1,10 +1,9 @@
 ---
+title: Two Sum
 ---
 
-# 1. Two Sum
-
-**Category:** algorithms
-**Difficulty:** Easy
+**Category:** algorithms\
+**Difficulty:** Easy\
 **Acceptance:** 56.752426%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/two-sum/)

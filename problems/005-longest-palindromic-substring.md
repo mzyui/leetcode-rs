@@ -1,10 +1,9 @@
 ---
+title: Longest Palindromic Substring
 ---
 
-# 5. Longest Palindromic Substring
-
-**Category:** algorithms
-**Difficulty:** Medium
+**Category:** algorithms\
+**Difficulty:** Medium\
 **Acceptance:** 36.97404%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/longest-palindromic-substring/)

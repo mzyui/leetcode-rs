@@ -1,10 +1,9 @@
 ---
+title: Add Two Numbers
 ---
 
-# 2. Add Two Numbers
-
-**Category:** algorithms
-**Difficulty:** Medium
+**Category:** algorithms\
+**Difficulty:** Medium\
 **Acceptance:** 47.55582%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/add-two-numbers/)

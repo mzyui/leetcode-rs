@@ -1,10 +1,9 @@
 ---
+title: Reverse Integer
 ---
 
-# 7. Reverse Integer
-
-**Category:** algorithms
-**Difficulty:** Medium
+**Category:** algorithms\
+**Difficulty:** Medium\
 **Acceptance:** 31.23623%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/reverse-integer/)

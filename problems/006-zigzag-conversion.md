@@ -1,10 +1,9 @@
 ---
+title: Zigzag Conversion
 ---
 
-# 6. Zigzag Conversion
-
-**Category:** algorithms
-**Difficulty:** Medium
+**Category:** algorithms\
+**Difficulty:** Medium\
 **Acceptance:** 53.124767%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/zigzag-conversion/)
