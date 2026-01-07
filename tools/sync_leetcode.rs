@@ -273,15 +273,21 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
 
             // ===== Normal text =====
-            if line.is_empty() {
-                out.push('\n');}
-            else if section == "constraints" {
-    // render sebagai list item
-    out.push_str("- ");
-    out.push_str(line);
-    out.push('\n');
+            let line = if section == "examples" {
+                emphasize_example_labels(line)
             } else {
-                out.push_str(line);
+                line.to_string()
+            };
+
+            if line.is_empty() {
+                out.push('\n');
+            } else if section == "constraints" {
+                // render sebagai list item
+                out.push_str("- ");
+                out.push_str(&line);
+                out.push('\n');
+            } else {
+                out.push_str(&line);
 
                 // tambahkan '\' hanya jika baris berikutnya bukan kosong
                 if !next_line.is_empty() {
@@ -546,4 +552,16 @@ fn lint_markdown(input: &str) -> String {
     }
 
     out
+}
+
+fn emphasize_example_labels(line: &str) -> String {
+    if let Some(rest) = line.strip_prefix("Input:") {
+        format!("**Input:**{}", rest)
+    } else if let Some(rest) = line.strip_prefix("Output:") {
+        format!("**Output:**{}", rest)
+    } else if let Some(rest) = line.strip_prefix("Explanation:") {
+        format!("**Explanation:**{}", rest)
+    } else {
+        line.to_string()
+    }
 }
