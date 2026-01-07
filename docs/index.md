@@ -4,11 +4,13 @@ title: leetcode-rs
 
 # LeetCode Solutions (Rust)
 
-This repository contains a curated collection of LeetCode solutions written in Rust,
+This site contains a curated collection of LeetCode solutions written in Rust,
 with a focus on clarity, correctness, and maintainable documentation.
 
-The repository is updated daily as part of a personal challenge to solve one
+The site is updated daily as part of a personal challenge to solve one
 LeetCode problem per day.
+
+> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs).
 
 ## Statistics
 

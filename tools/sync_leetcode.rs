@@ -349,14 +349,12 @@ fn generate_problem_readmes(
             }
             FileType::Index => {
                 if let Some(code) = generate_solution_hint(&root.join(&p.source))? {
-                    out.push_str(
-                        "<details>\n<summary>Click to reveal solution hint</summary>\n\n",
-                    );
+                    out.push_str("<details>\n<summary>Click to reveal solution hint</summary>\n\n");
 
-out.push_str("{% highlight rust %}\n");
-out.push_str(&code);
-out.push_str("\n{% endhighlight %}\n");
-
+                    out.push_str("{% highlight rust %}\n");
+                    out.push_str(&code);
+                    out.push_str("\n{% endhighlight %}\n");
+                    out.push_str("\n</details>\n");
                 }
                 out.push_str("\n---\n\n<small>[Back to index](../)</small>\n")
             }
@@ -378,7 +376,6 @@ out.push_str("\n{% endhighlight %}\n");
 
     Ok(())
 }
-
 
 fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Option<String>) {
     if constraints.is_empty() && follow_up.is_none() {
@@ -561,21 +558,27 @@ fn generate_index_readme(
 
     let mut out = String::new();
 
+    let mut ctx = "repository";
     if filetype == FileType::Index {
         out.push_str("---\ntitle: leetcode-rs\n---\n\n");
+        ctx = "site";
     }
 
+
     out.push_str("# LeetCode Solutions (Rust)\n\n");
-    out.push_str(
-        "This repository contains a curated collection of LeetCode solutions written in Rust,\n\
+    out.push_str(&format!(
+        "This {0} contains a curated collection of LeetCode solutions written in Rust,\n\
 with a focus on clarity, correctness, and maintainable documentation.\n\n\
-The repository is updated daily as part of a personal challenge to solve one\n\
-LeetCode problem per day.\n\n",
-    );
+The {0} is updated daily as part of a personal challenge to solve one\n\
+LeetCode problem per day.\n\n", ctx));
 
     if filetype == FileType::Readme {
         out.push_str(
-            "A browsable web version of this repository is available on the [project website](https://mzyui.github.io/leetcode-rs/).\n\n"
+            "> A browsable web version of this repository is available on the [project website](https://mzyui.github.io/leetcode-rs/).\n\n"
+        );
+    } else {
+        out.push_str(
+            "> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs).\n\n"
         );
     }
 

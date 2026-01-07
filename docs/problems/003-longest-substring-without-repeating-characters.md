@@ -77,6 +77,8 @@ impl Solution {
 }
 {% endhighlight %}
 
+</details>
+
 ---
 
 <small>[Back to index](../)</small>
