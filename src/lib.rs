@@ -16,4 +16,5 @@ mod solutions {
     include!("../solutions/5.longest-palindromic-substring.rs");
     include!("../solutions/6.zigzag-conversion.rs");
     include!("../solutions/7.reverse-integer.rs");
+    include!("../solutions/8.string-to-integer-atoi.rs");
 }

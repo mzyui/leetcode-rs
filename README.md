@@ -12,12 +12,12 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 7
+**Total Problems Solved:** 8
 
 | Difficulty | Count |
 |------------|-------|
 | Easy       | 1     |
-| Medium     | 5     |
+| Medium     | 6     |
 | Hard       | 1     |
 
 > This is a documentation-focused repository.  
@@ -43,6 +43,7 @@ LeetCode problem per day.
 | 5 | [Longest Palindromic Substring](problems/005-longest-palindromic-substring.md) | Medium | algorithms |
 | 6 | [Zigzag Conversion](problems/006-zigzag-conversion.md) | Medium | algorithms |
 | 7 | [Reverse Integer](problems/007-reverse-integer.md) | Medium | algorithms |
+| 8 | [String To Integer Atoi](problems/008-string-to-integer-atoi.md) | Medium | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 
