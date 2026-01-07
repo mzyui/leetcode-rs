@@ -72,11 +72,11 @@ impl ListNode {
 <pre><code class="language-rust">
 impl Solution {
     pub fn add_two_numbers(
-        mut l1: Option<Box<ListNode>>,
-        mut l2: Option<Box<ListNode>>,
-    ) -> Option<Box<ListNode>> {
+        mut l1: Option&lt;Box&lt;ListNode&gt;&gt;,
+        mut l2: Option&lt;Box&lt;ListNode&gt;&gt;,
+    ) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
         let mut dummy = Box::new(ListNode::new(0));
-        let mut tail = &mut dummy;
+        let mut tail = &amp;mut dummy;
         let mut carry = 0;
 
         while l1.is_some() || l2.is_some() || carry != 0 {

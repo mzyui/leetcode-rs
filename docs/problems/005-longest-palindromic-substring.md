@@ -47,7 +47,7 @@ Given a string s, return the longest palindromic substring in s.
 
 <pre><code class="language-rust">
 impl Solution {
-    pub fn longest_palindrome(s: String) -> String {
+    pub fn longest_palindrome(s: String) -&gt; String {
         let n = s.len();
         if n == 0 {
             return String::new();
@@ -66,17 +66,17 @@ impl Solution {
         let (mut max_len, mut idx) = (0, 0);
 
         for i in 0..m {
-            if i < r {
+            if i &lt; r {
                 p[i] = p[2 * c - i].min(r - i);
             }
-            while i + p[i] + 1 < m && i > p[i] && t[i + p[i] + 1] == t[i - p[i] - 1] {
+            while i + p[i] + 1 &lt; m &amp;&amp; i &gt; p[i] &amp;&amp; t[i + p[i] + 1] == t[i - p[i] - 1] {
                 p[i] += 1;
             }
-            if i + p[i] > r {
+            if i + p[i] &gt; r {
                 c = i;
                 r = i + p[i];
             }
-            if p[i] > max_len {
+            if p[i] &gt; max_len {
                 max_len = p[i];
                 idx = i;
             }

@@ -67,10 +67,10 @@ P     I
 
 <pre><code class="language-rust">
 impl Solution {
-    pub fn convert(s: String, num_rows: i32) -> String {
+    pub fn convert(s: String, num_rows: i32) -&gt; String {
         let n = num_rows as usize;
         let len = s.len();
-        if n == 1 || n >= len {
+        if n == 1 || n &gt;= len {
             return s;
         }
 
@@ -80,11 +80,11 @@ impl Solution {
 
         for row in 0..n {
             let mut i = row;
-            while i < len {
+            while i &lt; len {
                 res.push(bytes[i]);
 
                 let diag = i + cycle - 2 * row;
-                if row != 0 && row != n - 1 && diag < len {
+                if row != 0 &amp;&amp; row != n - 1 &amp;&amp; diag &lt; len {
                     res.push(bytes[diag]);
                 }
 

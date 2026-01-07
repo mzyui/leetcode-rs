@@ -54,7 +54,7 @@ The overall run time complexity should be O(log (m+n)).
 
 <pre><code class="language-rust">
 impl Solution {
-    pub fn find_median_sorted_arrays(mut nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
+    pub fn find_median_sorted_arrays(mut nums1: Vec&lt;i32&gt;, nums2: Vec&lt;i32&gt;) -&gt; f64 {
         nums1.extend(nums2);
         let n = nums1.len();
         let mid = n / 2;
