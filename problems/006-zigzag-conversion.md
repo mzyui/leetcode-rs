@@ -70,5 +70,5 @@ s consists of English letters (lower-case and upper-case), ',' and '.'.\
 
 <small>
 
-[← Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md)
+[← Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md) · [Next →](../problems/007-reverse-integer.md)
 </small>

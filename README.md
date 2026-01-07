@@ -8,10 +8,10 @@ LeetCode problem per day.
 
 ## Statistics
 
-- **Total problems:** 6
+- **Total problems:** 7
 - **Difficulty breakdown:**
   - Easy: 1
-  - Medium: 4
+  - Medium: 5
   - Hard: 1
 
 > This is a documentation-focused repository.  
@@ -36,6 +36,7 @@ LeetCode problem per day.
 | 4 | [Median Of Two Sorted Arrays](problems/004-median-of-two-sorted-arrays.md) | Hard | algorithms |
 | 5 | [Longest Palindromic Substring](problems/005-longest-palindromic-substring.md) | Medium | algorithms |
 | 6 | [Zigzag Conversion](problems/006-zigzag-conversion.md) | Medium | algorithms |
+| 7 | [Reverse Integer](problems/007-reverse-integer.md) | Medium | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 

@@ -15,4 +15,5 @@ mod solutions {
     include!("../solutions/4.median-of-two-sorted-arrays.rs");
     include!("../solutions/5.longest-palindromic-substring.rs");
     include!("../solutions/6.zigzag-conversion.rs");
+    include!("../solutions/7.reverse-integer.rs");
 }
