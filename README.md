@@ -1,3 +1,5 @@
+![leetcode-rs banner](docs/assets/banner.png)
+
 # LeetCode Solutions (Rust)
 
 This repository contains a curated collection of LeetCode solutions written in Rust,
@@ -87,6 +89,9 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 - `solutions/` is the single source of truth
 - Files under `problems/` and `src/` are auto-generated
 - Manual edits to generated files will be overwritten
+
+---
+
 ## Credits
 
 - LeetCode platform
