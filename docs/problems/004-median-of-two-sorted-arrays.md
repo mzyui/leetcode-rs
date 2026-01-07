@@ -49,7 +49,31 @@ The overall run time complexity should be O(log (m+n)).
 
 ## Source / Solution
 
-[solutions/4.median-of-two-sorted-arrays.rs](../solutions/4.median-of-two-sorted-arrays.rs)
+<details>
+<summary>Click to reveal solution hint</summary>
+
+```rust
+impl Solution {
+    pub fn find_median_sorted_arrays(mut nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
+        nums1.extend(nums2);
+        let n = nums1.len();
+        let mid = n / 2;
+
+        if n % 2 == 1 {
+            nums1.select_nth_unstable(mid);
+            nums1[mid] as f64
+        } else {
+            nums1.select_nth_unstable(mid);
+            let upper = nums1[mid];
+            nums1.select_nth_unstable(mid - 1);
+            let lower = nums1[mid - 1];
+            (lower as f64 + upper as f64) / 2.0
+        }
+    }
+}
+```
+
+</details>
 
 ---
 

@@ -42,7 +42,53 @@ Given a string s, return the longest palindromic substring in s.
 
 ## Source / Solution
 
-[solutions/5.longest-palindromic-substring.rs](../solutions/5.longest-palindromic-substring.rs)
+<details>
+<summary>Click to reveal solution hint</summary>
+
+```rust
+impl Solution {
+    pub fn longest_palindrome(s: String) -> String {
+        let n = s.len();
+        if n == 0 {
+            return String::new();
+        }
+
+        let mut t = Vec::with_capacity(2 * n + 1);
+        for c in s.chars() {
+            t.push('#');
+            t.push(c);
+        }
+        t.push('#');
+
+        let m = t.len();
+        let mut p = vec![0; m];
+        let (mut c, mut r) = (0, 0);
+        let (mut max_len, mut idx) = (0, 0);
+
+        for i in 0..m {
+            if i < r {
+                p[i] = p[2 * c - i].min(r - i);
+            }
+            while i + p[i] + 1 < m && i > p[i] && t[i + p[i] + 1] == t[i - p[i] - 1] {
+                p[i] += 1;
+            }
+            if i + p[i] > r {
+                c = i;
+                r = i + p[i];
+            }
+            if p[i] > max_len {
+                max_len = p[i];
+                idx = i;
+            }
+        }
+
+        let start = (idx - max_len) / 2;
+        s[start..start + max_len].to_string()
+    }
+}
+```
+
+</details>
 
 ---
 

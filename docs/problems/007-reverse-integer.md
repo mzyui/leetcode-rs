@@ -47,7 +47,26 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 
 ## Source / Solution
 
-[solutions/7.reverse-integer.rs](../solutions/7.reverse-integer.rs)
+<details>
+<summary>Click to reveal solution hint</summary>
+
+```rust
+impl Solution {
+    pub fn reverse(mut x: i32) -> i32 {
+        let mut r = 0;
+        while x != 0 {
+            let d = x % 10;
+            x /= 10;
+            if r > 214748364 || (r == 214748364 && d > 7) { return 0; }
+            if r < -214748364 || (r == -214748364 && d < -8) { return 0; }
+            r = r * 10 + d;
+        }
+        r
+    }
+}
+```
+
+</details>
 
 ---
 

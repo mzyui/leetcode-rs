@@ -66,7 +66,43 @@ impl ListNode {
 
 ## Source / Solution
 
-[solutions/2.add-two-numbers.rs](../solutions/2.add-two-numbers.rs)
+<details>
+<summary>Click to reveal solution hint</summary>
+
+```rust
+impl Solution {
+    pub fn add_two_numbers(
+        mut l1: Option<Box<ListNode>>,
+        mut l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
+        let mut dummy = Box::new(ListNode::new(0));
+        let mut tail = &mut dummy;
+        let mut carry = 0;
+
+        while l1.is_some() || l2.is_some() || carry != 0 {
+            let mut sum = carry;
+
+            if let Some(mut n1) = l1.take() {
+                sum += n1.val;
+                l1 = n1.next.take();
+            }
+
+            if let Some(mut n2) = l2.take() {
+                sum += n2.val;
+                l2 = n2.next.take();
+            }
+
+            carry = sum / 10;
+            tail.next = Some(Box::new(ListNode::new(sum % 10)));
+            tail = tail.next.as_mut().unwrap();
+        }
+
+        dummy.next
+    }
+}
+```
+
+</details>
 
 ---
 

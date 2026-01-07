@@ -50,7 +50,34 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 
 ## Source / Solution
 
-[solutions/3.longest-substring-without-repeating-characters.rs](../solutions/3.longest-substring-without-repeating-characters.rs)
+<details>
+<summary>Click to reveal solution hint</summary>
+
+```rust
+impl Solution {
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        let bytes = s.as_bytes();
+        let mut last = [-1; 128];
+        let mut left = 0;
+        let mut max_len = 0;
+
+        for right in 0..bytes.len() {
+            let c = bytes[right] as usize;
+
+            if last[c] >= left {
+                left = last[c] + 1;
+            }
+
+            last[c] = right as i32;
+            max_len = max_len.max(right as i32 - left + 1);
+        }
+
+        max_len
+    }
+}
+```
+
+</details>
 
 ---
 

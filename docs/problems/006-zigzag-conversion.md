@@ -62,7 +62,42 @@ P     I
 
 ## Source / Solution
 
-[solutions/6.zigzag-conversion.rs](../solutions/6.zigzag-conversion.rs)
+<details>
+<summary>Click to reveal solution hint</summary>
+
+```rust
+impl Solution {
+    pub fn convert(s: String, num_rows: i32) -> String {
+        let n = num_rows as usize;
+        let len = s.len();
+        if n == 1 || n >= len {
+            return s;
+        }
+
+        let bytes = s.as_bytes();
+        let cycle = 2 * n - 2;
+        let mut res = Vec::with_capacity(len);
+
+        for row in 0..n {
+            let mut i = row;
+            while i < len {
+                res.push(bytes[i]);
+
+                let diag = i + cycle - 2 * row;
+                if row != 0 && row != n - 1 && diag < len {
+                    res.push(bytes[diag]);
+                }
+
+                i += cycle;
+            }
+        }
+
+        unsafe { String::from_utf8_unchecked(res) }
+    }
+}
+```
+
+</details>
 
 ---
 
