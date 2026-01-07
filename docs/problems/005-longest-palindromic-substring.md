@@ -46,4 +46,4 @@ Given a string s, return the longest palindromic substring in s.
 
 ---
 
-<small>[Back to index](../README.md)</small>
+<small>[Back to index](../)</small>

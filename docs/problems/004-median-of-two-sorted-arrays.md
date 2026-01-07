@@ -53,4 +53,4 @@ The overall run time complexity should be O(log (m+n)).
 
 ---
 
-<small>[Back to index](../README.md)</small>
+<small>[Back to index](../)</small>

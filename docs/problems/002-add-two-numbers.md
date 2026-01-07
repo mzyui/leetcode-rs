@@ -70,4 +70,4 @@ impl ListNode {
 
 ---
 
-<small>[Back to index](../README.md)</small>
+<small>[Back to index](../)</small>

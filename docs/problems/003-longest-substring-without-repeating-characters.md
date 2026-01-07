@@ -54,4 +54,4 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 
 ---
 
-<small>[Back to index](../README.md)</small>
+<small>[Back to index](../)</small>
