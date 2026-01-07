@@ -274,7 +274,12 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
 
             // ===== Normal text =====
             if line.is_empty() {
-                out.push('\n');
+                out.push('\n');}
+            else if section == "constraints" {
+    // render sebagai list item
+    out.push_str("- ");
+    out.push_str(line);
+    out.push('\n');
             } else {
                 out.push_str(line);
 
