@@ -1,7 +1,7 @@
 # 2. Add Two Numbers
 
-**Category:** algorithms\
-**Difficulty:** Medium\
+**Category:** algorithms
+**Difficulty:** Medium
 **Acceptance:** 47.55582%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/add-two-numbers/)
@@ -38,11 +38,10 @@ You may assume the two numbers do not contain any leading zero, except the numbe
 
 ## Constraints
 
-- The number of nodes in each linked list is in the range [1, 100].
-- 0 <= Node.val <= 9
-- It is guaranteed that the list represents a number that does not have leading zeros.
-
-- Definition for singly-linked list.
+- The number of nodes in each linked list is in the range [**1**, **100**].
+- **0** <= *Node.val* <= **9**
+- It is guaranteed that the list represents a number that does not have leading *zeros.*
+- Definition for singly-linked *list.*
 
 ```rust
 #[derive(PartialEq, Eq, Clone, Debug)]
@@ -61,19 +60,10 @@ impl ListNode {
 
 ---
 
-## Test Data
-
-[solutions/2.add-two-numbers.tests.dat](../solutions/2.add-two-numbers.tests.dat)
-
----
-
 ## Source / Solution
 
 [solutions/2.add-two-numbers.rs](../solutions/2.add-two-numbers.rs)
 
 ---
 
-<small>
-
-[← Previous](../problems/001-two-sum.md) · [Back to index](../README.md) · [Next →](../problems/003-longest-substring-without-repeating-characters.md)
-</small>
+<small>[Back to index](../README.md)</small>

@@ -84,14 +84,12 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 - `solutions/` is the single source of truth
 - Files under `problems/` and `src/` are auto-generated
 - Manual edits to generated files will be overwritten
-
----
-
 ## Credits
 
-- Problem statements and metadata were sourced using:
-  - https://github.com/clearloop/leetcode-cli
-- All solutions are authored and maintained manually.
+- LeetCode platform
+- leetcode-cli by clearloop ([GitHub repository](https://github.com/clearloop/leetcode-cli))
+- Tooling (`sync_leetcode`) was developed with assistance from an AI language model (ChatGPT, GPT-5).
+
 
 ---
 

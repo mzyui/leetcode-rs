@@ -1,7 +1,7 @@
 # 6. Zigzag Conversion
 
-**Category:** algorithms\
-**Difficulty:** Medium\
+**Category:** algorithms
+**Difficulty:** Medium
 **Acceptance:** 53.124767%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/zigzag-conversion/)
@@ -50,15 +50,9 @@ P     I
 
 ## Constraints
 
-- 1 <= s.length <= 1000
+- **1** <= *s.length* <= **1000**
 - s consists of English letters (lower-case and upper-case), ',' and '.'.
-- 1 <= numRows <= 1000
-
----
-
-## Test Data
-
-[solutions/6.zigzag-conversion.tests.dat](../solutions/6.zigzag-conversion.tests.dat)
+- **1** <= numRows <= **1000**
 
 ---
 
@@ -68,7 +62,4 @@ P     I
 
 ---
 
-<small>
-
-[← Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md) · [Next →](../problems/007-reverse-integer.md)
-</small>
+<small>[Back to index](../README.md)</small>

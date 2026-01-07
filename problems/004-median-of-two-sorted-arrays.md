@@ -1,7 +1,7 @@
 # 4. Median Of Two Sorted Arrays
 
-**Category:** algorithms\
-**Difficulty:** Hard\
+**Category:** algorithms
+**Difficulty:** Hard
 **Acceptance:** 45.47212%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/median-of-two-sorted-arrays/)
@@ -34,18 +34,12 @@ The overall run time complexity should be O(log (m+n)).
 
 ## Constraints
 
-- nums1.length == m
-- nums2.length == n
-- 0 <= m <= 1000
-- 0 <= n <= 1000
-- 1 <= m + n <= 2000
-- -10⁶ <= nums1[i], nums2[i] <= 10⁶
-
----
-
-## Test Data
-
-[solutions/4.median-of-two-sorted-arrays.tests.dat](../solutions/4.median-of-two-sorted-arrays.tests.dat)
+- *nums1.length* == m
+- *nums2.length* == n
+- **0** <= m <= **1000**
+- **0** <= n <= **1000**
+- **1** <= m + n <= **2000**
+- **-10**⁶ <= *nums1[i]*, *nums2[i]* <= **10**⁶
 
 ---
 
@@ -55,7 +49,4 @@ The overall run time complexity should be O(log (m+n)).
 
 ---
 
-<small>
-
-[← Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md) · [Next →](../problems/005-longest-palindromic-substring.md)
-</small>
+<small>[Back to index](../README.md)</small>

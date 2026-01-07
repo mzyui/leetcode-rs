@@ -1,7 +1,7 @@
 # 5. Longest Palindromic Substring
 
-**Category:** algorithms\
-**Difficulty:** Medium\
+**Category:** algorithms
+**Difficulty:** Medium
 **Acceptance:** 36.97404%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/longest-palindromic-substring/)
@@ -31,14 +31,8 @@ Given a string s, return the longest palindromic substring in s.
 
 ## Constraints
 
-- 1 <= s.length <= 1000
-- s consist of only digits and English letters.
-
----
-
-## Test Data
-
-[solutions/5.longest-palindromic-substring.tests.dat](../solutions/5.longest-palindromic-substring.tests.dat)
+- **1** <= *s.length* <= **1000**
+- s consist of only digits and English *letters.*
 
 ---
 
@@ -48,7 +42,4 @@ Given a string s, return the longest palindromic substring in s.
 
 ---
 
-<small>
-
-[← Previous](../problems/004-median-of-two-sorted-arrays.md) · [Back to index](../README.md) · [Next →](../problems/006-zigzag-conversion.md)
-</small>
+<small>[Back to index](../README.md)</small>

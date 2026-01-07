@@ -190,46 +190,54 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
     let dir = root.join("problems");
     fs::create_dir_all(&dir)?;
 
-    for (i, p) in problems.iter().enumerate() {
+    for (_i, p) in problems.iter().enumerate() {
         let path = dir.join(format!("{:03}-{}.md", p.number, p.slug));
         let mut out = String::new();
 
         out.push_str(&format!("# {}. {}\n\n", p.number, p.title));
-
         out.push_str(&format!(
-            "**Category:** {}\\\n**Difficulty:** {}\\\n**Acceptance:** {}\n\n",
+            "**Category:** {}\n**Difficulty:** {}\n**Acceptance:** {}\n\n",
             p.category, p.level, p.percent
         ));
-
         out.push_str(&format!(
             "**LeetCode:** [View on LeetCode](https://leetcode.com/problems/{}/)\n\n",
             p.slug
         ));
+
         out.push_str("---\n\n## Problem\n\n");
 
         let mut section = "problem";
         let mut example_idx = 0;
 
-        let mut in_code_session = false;
+        let mut in_code = false;
         let mut code_buffer = String::new();
+
+        let mut constraint_lines: Vec<String> = Vec::new();
+        let mut follow_up_line: Option<String> = None;
 
         let lines: Vec<&str> = p.description.lines().collect();
 
         for (idx, raw) in lines.iter().enumerate() {
             let line = raw.trim_start();
             let next_line = lines.get(idx + 1).map(|l| l.trim()).unwrap_or("");
+            let is_code = looks_like_code(line);
 
-            let starts_code = looks_like_code(line);
+            /* ===== SECTION SWITCH ===== */
 
-            // ===== Examples =====
             if line.starts_with("Example") {
-                if in_code_session {
+                if in_code {
                     let formatted = format_with_rustfmt(&code_buffer);
                     out.push_str("```rust\n");
                     out.push_str(&formatted);
                     out.push_str("```\n");
                     code_buffer.clear();
-                    in_code_session = false;
+                    in_code = false;
+                }
+
+                if section == "constraints" {
+                    render_constraints(&mut out, &constraint_lines, &follow_up_line);
+                    constraint_lines.clear();
+                    follow_up_line = None;
                 }
 
                 if section != "examples" {
@@ -242,15 +250,14 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
                 continue;
             }
 
-            // ===== Constraints =====
             if line.starts_with("Constraints") {
-                if in_code_session {
+                if in_code {
                     let formatted = format_with_rustfmt(&code_buffer);
                     out.push_str("```rust\n");
                     out.push_str(&formatted);
                     out.push_str("```\n");
                     code_buffer.clear();
-                    in_code_session = false;
+                    in_code = false;
                 }
 
                 out.push_str("\n---\n\n## Constraints\n\n");
@@ -258,38 +265,47 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
                 continue;
             }
 
-            // ===== Enter code session =====
-            if starts_code && !in_code_session {
-                in_code_session = true;
+            /* ===== ENTER CODE SESSION ===== */
+
+            if is_code && !in_code {
+                in_code = true;
                 code_buffer.clear();
             }
 
-            // ===== Inside code session =====
-            if in_code_session {
+            if in_code {
                 code_buffer.push_str(line);
                 code_buffer.push('\n');
-
                 continue;
             }
 
-            // ===== Normal text =====
-            let line = if section == "examples" {
-                emphasize_example_labels(line)
-            } else {
-                line.to_string()
-            };
+            /* ===== CONSTRAINT COLLECTION ===== */
+
+            if section == "constraints" {
+                if line.is_empty() {
+                    continue;
+                }
+
+                if line.starts_with("Follow-up:") {
+                    follow_up_line = Some(line.to_string());
+                } else {
+                    constraint_lines.push(line.to_string());
+                }
+                continue;
+            }
+
+            /* ===== NORMAL TEXT ===== */
 
             if line.is_empty() {
                 out.push('\n');
-            } else if section == "constraints" {
-                // render sebagai list item
-                out.push_str("- ");
-                out.push_str(&line);
-                out.push('\n');
             } else {
-                out.push_str(&line);
+                let rendered = if section == "examples" {
+                    emphasize_example_labels(line)
+                } else {
+                    line.to_string()
+                };
 
-                // tambahkan '\' hanya jika baris berikutnya bukan kosong
+                out.push_str(&rendered);
+
                 if !next_line.is_empty() {
                     out.push('\\');
                 }
@@ -298,53 +314,156 @@ fn generate_problem_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<
             }
         }
 
-        // flush jika file berakhir dalam code session
-        if in_code_session && !code_buffer.is_empty() {
+        /* ===== FINAL FLUSH ===== */
+        if section == "constraints" {
+            render_constraints(&mut out, &constraint_lines, &follow_up_line);
+        }
+
+        if in_code && !code_buffer.is_empty() {
             let formatted = format_with_rustfmt(&code_buffer);
-            out.push_str("```rust\n");
+            out.push_str("\n```rust\n");
             out.push_str(&formatted);
             out.push_str("```\n");
         }
 
-        // ===== Test Data =====
-        let test_path = format!("solutions/{}.{}.tests.dat", p.number, p.slug);
-        if root.join(&test_path).exists() {
-            out.push_str("\n---\n\n## Test Data\n\n");
-            out.push_str(&format!("[{}](../{})\n", test_path, test_path));
-        }
-
-        // ===== Source =====
         out.push_str("\n---\n\n## Source / Solution\n\n");
         out.push_str(&format!("[{}](../{})\n", p.source, p.source));
 
-        // ===== Navigation =====
-        out.push_str("\n---\n\n<small>\n\n");
+        out.push_str("\n---\n\n<small>[Back to index](../README.md)</small>\n");
 
-        if i > 0 {
-            let prev = &problems[i - 1];
-            out.push_str(&format!(
-                "[← Previous](../problems/{:03}-{}.md) · ",
-                prev.number, prev.slug
-            ));
-        }
-
-        out.push_str("[Back to index](../README.md)");
-
-        if i + 1 < problems.len() {
-            let next = &problems[i + 1];
-            out.push_str(&format!(
-                " · [Next →](../problems/{:03}-{}.md)",
-                next.number, next.slug
-            ));
-        }
-
-        out.push_str("\n</small>\n");
-
-        let cleaned = lint_markdown(&out);
-        fs::write(path, cleaned)?;
+        fs::write(path, lint_markdown(&out))?;
     }
 
     Ok(())
+}
+
+fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Option<String>) {
+    if constraints.is_empty() && follow_up.is_none() {
+        return;
+    }
+
+    let listable = constraints.iter().all(|l| is_simple_constraint_line(l));
+
+    if listable {
+        for line in constraints {
+            let emphasized = emphasize_constraint_line(line);
+            out.push_str("- ");
+            out.push_str(&emphasized);
+            out.push('\n');
+        }
+    } else {
+        for line in constraints {
+            out.push_str(line);
+            out.push('\n');
+        }
+    }
+
+    if let Some(fu) = follow_up {
+        out.push('\n');
+
+        if let Some(rest) = fu.strip_prefix("Follow-up:") {
+            out.push_str("**Follow-up:** ");
+            out.push_str(rest.trim_start());
+        } else {
+            out.push_str("**Follow-up:** ");
+            out.push_str(fu);
+        }
+
+        out.push('\n');
+    }
+}
+
+fn is_simple_constraint_line(line: &str) -> bool {
+    let l = line.trim();
+
+    // kosong bukan constraint
+    if l.is_empty() {
+        return false;
+    }
+
+    // terlihat seperti code / directive
+    if l.starts_with("```")
+        || l.starts_with("//")
+        || l.starts_with('#')
+        || l.contains('{')
+        || l.contains('}')
+        || l.contains(';')
+    {
+        return false;
+    }
+
+    // baris terindent biasanya code / quote
+    if line.starts_with(' ') || line.starts_with('\t') {
+        return false;
+    }
+
+    // terlalu panjang → kemungkinan kalimat kompleks
+    if l.len() > 120 {
+        return false;
+    }
+
+    true
+}
+
+fn emphasize_constraint_line(line: &str) -> String {
+    let mut out = String::new();
+    let chars: Vec<char> = line.chars().collect();
+    let mut i = 0;
+
+    while i < chars.len() {
+        let c = chars[i];
+
+        // === Bold angka / batas numerik ===
+        if c.is_ascii_digit() || (c == '-' && i + 1 < chars.len() && chars[i + 1].is_ascii_digit())
+        {
+            let start = i;
+            i += 1;
+
+            while i < chars.len() && (chars[i].is_ascii_digit() || chars[i] == '^') {
+                i += 1;
+            }
+
+            let num: String = chars[start..i].iter().collect();
+            out.push_str("**");
+            out.push_str(&num);
+            out.push_str("**");
+            continue;
+        }
+
+        // === Italic identifier teknis (nums[i], nums.length, Node.val) ===
+        if c.is_ascii_alphabetic() || c == '_' {
+            let start = i;
+            i += 1;
+
+            while i < chars.len()
+                && (chars[i].is_ascii_alphanumeric()
+                    || chars[i] == '_'
+                    || chars[i] == '.'
+                    || chars[i] == '['
+                    || chars[i] == ']')
+            {
+                i += 1;
+            }
+
+            let ident: String = chars[start..i].iter().collect();
+
+            if ident.contains('.') || ident.contains('[') {
+                out.push('*');
+                out.push_str(&ident);
+                out.push('*');
+            } else {
+                out.push_str(&ident);
+            }
+
+            continue;
+        }
+
+        // === Karakter lain ===
+        out.push(c);
+        i += 1;
+    }
+
+    out
 }
 
 fn cleanup_orphan_readmes(problems: &[Problem], root: &PathBuf) -> io::Result<()> {
@@ -490,10 +609,11 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode\n\
 - Manual edits to generated files will be overwritten\n",
     );
 
-    out.push_str("\n---\n\n## Credits\n\n");
+    out.push_str("## Credits\n\n");
     out.push_str(
-    "- Problem statements and metadata were sourced using:\n  - https://github.com/clearloop/leetcode-cli\n\
-- All solutions are authored and maintained manually.\n",
+        "- LeetCode platform\n\
+- leetcode-cli by clearloop ([GitHub repository](https://github.com/clearloop/leetcode-cli))\n\
+- Tooling (`sync_leetcode`) was developed with assistance from an AI language model (ChatGPT, GPT-5).\n\n",
     );
 
     out.push_str("\n---\n\n## Disclaimer\n\n");

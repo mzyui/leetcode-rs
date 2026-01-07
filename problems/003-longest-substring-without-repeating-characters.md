@@ -1,7 +1,7 @@
 # 3. Longest Substring Without Repeating Characters
 
-**Category:** algorithms\
-**Difficulty:** Medium\
+**Category:** algorithms
+**Difficulty:** Medium
 **Acceptance:** 38.123196%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
@@ -39,14 +39,8 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 
 ## Constraints
 
-- 0 <= s.length <= 5 * 10⁴
-- s consists of English letters, digits, symbols and spaces.
-
----
-
-## Test Data
-
-[solutions/3.longest-substring-without-repeating-characters.tests.dat](../solutions/3.longest-substring-without-repeating-characters.tests.dat)
+- **0** <= *s.length* <= **5** * **10**⁴
+- s consists of English letters, digits, symbols and *spaces.*
 
 ---
 
@@ -56,7 +50,4 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 
 ---
 
-<small>
-
-[← Previous](../problems/002-add-two-numbers.md) · [Back to index](../README.md) · [Next →](../problems/004-median-of-two-sorted-arrays.md)
-</small>
+<small>[Back to index](../README.md)</small>

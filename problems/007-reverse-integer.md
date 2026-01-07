@@ -1,7 +1,7 @@
 # 7. Reverse Integer
 
-**Category:** algorithms\
-**Difficulty:** Medium\
+**Category:** algorithms
+**Difficulty:** Medium
 **Acceptance:** 31.23623%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/reverse-integer/)
@@ -37,13 +37,7 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 
 ## Constraints
 
-- -2³¹ <= x <= 2³¹ - 1
-
----
-
-## Test Data
-
-[solutions/7.reverse-integer.tests.dat](../solutions/7.reverse-integer.tests.dat)
+- **-2**³¹ <= x <= **2**³¹ - **1**
 
 ---
 
@@ -53,7 +47,4 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 
 ---
 
-<small>
-
-[← Previous](../problems/006-zigzag-conversion.md) · [Back to index](../README.md)
-</small>
+<small>[Back to index](../README.md)</small>

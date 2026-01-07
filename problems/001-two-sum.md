@@ -1,7 +1,7 @@
 # 1. Two Sum
 
-**Category:** algorithms\
-**Difficulty:** Easy\
+**Category:** algorithms
+**Difficulty:** Easy
 **Acceptance:** 56.752426%
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/two-sum/)
@@ -40,18 +40,12 @@ You can return the answer in any order.
 
 ## Constraints
 
-- 2 <= nums.length <= 10⁴
-- -10⁹ <= nums[i] <= 10⁹
-- -10⁹ <= target <= 10⁹
-- Only one valid answer exists.
+- **2** <= *nums.length* <= **10**⁴
+- **-10**⁹ <= *nums[i]* <= **10**⁹
+- **-10**⁹ <= target <= **10**⁹
+- Only one valid answer *exists.*
 
-- Follow-up: Can you come up with an algorithm that is less than O(n²) time complexity?
-
----
-
-## Test Data
-
-[solutions/1.two-sum.tests.dat](../solutions/1.two-sum.tests.dat)
+**Follow-up:** Can you come up with an algorithm that is less than O(n²) time complexity?
 
 ---
 
@@ -61,7 +55,4 @@ You can return the answer in any order.
 
 ---
 
-<small>
-
-[Back to index](../README.md) · [Next →](../problems/002-add-two-numbers.md)
-</small>
+<small>[Back to index](../README.md)</small>
