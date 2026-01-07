@@ -63,10 +63,9 @@ P     I
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn convert(s: String, num_rows: i32) -> String {
         let n = num_rows as usize;
@@ -96,8 +95,7 @@ impl Solution {
         unsafe { String::from_utf8_unchecked(res) }
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---

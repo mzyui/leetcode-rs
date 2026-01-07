@@ -51,10 +51,9 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn length_of_longest_substring(s: String) -> i32 {
         let bytes = s.as_bytes();
@@ -76,8 +75,7 @@ impl Solution {
         max_len
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---

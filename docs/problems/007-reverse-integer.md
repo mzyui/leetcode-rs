@@ -48,10 +48,9 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn reverse(mut x: i32) -> i32 {
         let mut r = 0;
@@ -65,8 +64,7 @@ impl Solution {
         r
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---

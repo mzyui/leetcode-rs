@@ -67,10 +67,9 @@ impl ListNode {
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn add_two_numbers(
         mut l1: Option<Box<ListNode>>,
@@ -101,8 +100,7 @@ impl Solution {
         dummy.next
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---

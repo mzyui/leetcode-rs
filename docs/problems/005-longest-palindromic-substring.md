@@ -43,10 +43,9 @@ Given a string s, return the longest palindromic substring in s.
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn longest_palindrome(s: String) -> String {
         let n = s.len();
@@ -87,8 +86,7 @@ impl Solution {
         s[start..start + max_len].to_string()
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---

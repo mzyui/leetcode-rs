@@ -50,10 +50,9 @@ The overall run time complexity should be O(log (m+n)).
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn find_median_sorted_arrays(mut nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
         nums1.extend(nums2);
@@ -72,8 +71,7 @@ impl Solution {
         }
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---

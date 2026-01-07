@@ -56,10 +56,9 @@ You can return the answer in any order.
 ## Source / Solution
 
 <details>
-
 <summary>Click to reveal solution hint</summary>
 
-```rust
+<pre><code class="language-rust">
 impl Solution {
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut map: HashMap<i32, i32> = HashMap::new();
@@ -77,8 +76,7 @@ impl Solution {
         vec![]
     }
 }
-```
-
+</code></pre>
 </details>
 
 ---
