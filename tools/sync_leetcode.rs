@@ -146,7 +146,11 @@ fn parse_problem(path: &PathBuf) -> io::Result<Problem> {
         } else if l.starts_with("// Percent:") {
             percent = l[11..].trim().to_string();
         } else if l.starts_with("//") {
-            desc.push(l.trim_start_matches("//").trim().to_string());
+            desc.push(
+                l.trim_start_matches("//")
+                    .trim_start_matches(" ")
+                    .to_string(),
+            );
         } else if l.starts_with("use ") || l.starts_with("impl ") {
             break;
         }
@@ -233,6 +237,7 @@ fn generate_problem_readmes(
 
         for (idx, raw) in lines.iter().enumerate() {
             let line = raw.trim_start();
+            let is_indented = raw.starts_with('\t') || raw.starts_with("    ");
             let next_line = lines.get(idx + 1).map(|l| l.trim()).unwrap_or("");
             let is_code = looks_like_code(line);
 
@@ -299,7 +304,7 @@ fn generate_problem_readmes(
                     continue;
                 }
 
-                if line.starts_with("Follow-up:") {
+                if line.trim().to_lowercase().starts_with("follow") && line.contains(":") {
                     follow_up_line = Some(line.to_string());
                 } else {
                     constraint_lines.push(line.to_string());
@@ -318,10 +323,14 @@ fn generate_problem_readmes(
                     line.to_string()
                 };
 
-                out.push_str(&rendered);
+                if is_indented && section != "constraints" {
+                    out.push_str(&format!("- {}", rendered));
+                } else {
+                    out.push_str(&rendered);
 
-                if !next_line.is_empty() {
-                    out.push('\\');
+                    if !next_line.is_empty() {
+                        out.push('\\');
+                    }
                 }
 
                 out.push('\n');
@@ -450,15 +459,8 @@ fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Opti
 
     if let Some(fu) = follow_up {
         out.push('\n');
-
-        if let Some(rest) = fu.strip_prefix("Follow-up:") {
-            out.push_str("**Follow-up:** ");
-            out.push_str(rest.trim_start());
-        } else {
-            out.push_str("**Follow-up:** ");
-            out.push_str(fu);
-        }
-
+        out.push_str("**Follow-up:**");
+        out.push_str(&fu[10..]);
         out.push('\n');
     }
 }
@@ -466,12 +468,10 @@ fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Opti
 fn is_simple_constraint_line(line: &str) -> bool {
     let l = line.trim();
 
-    // kosong bukan constraint
     if l.is_empty() {
         return false;
     }
 
-    // terlihat seperti code / directive
     if l.starts_with("```")
         || l.starts_with("//")
         || l.starts_with('#')
@@ -482,12 +482,10 @@ fn is_simple_constraint_line(line: &str) -> bool {
         return false;
     }
 
-    // baris terindent biasanya code / quote
     if line.starts_with(' ') || line.starts_with('\t') {
         return false;
     }
 
-    // terlalu panjang → kemungkinan kalimat kompleks
     if l.len() > 120 {
         return false;
     }
@@ -910,11 +908,7 @@ fn extract_solution_impl(src: &str) -> Option<String> {
         }
     }
 
-    if buf.is_empty() {
-        None
-    } else {
-        Some(buf)
-    }
+    if buf.is_empty() { None } else { Some(buf) }
 }
 
 fn generate_solution_hint(solution_path: &Path) -> io::Result<Option<String>> {
