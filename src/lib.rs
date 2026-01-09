@@ -17,4 +17,5 @@ mod solutions {
     include!("../solutions/6.zigzag-conversion.rs");
     include!("../solutions/7.reverse-integer.rs");
     include!("../solutions/8.string-to-integer-atoi.rs");
+    include!("../solutions/9.palindrome-number.rs");
 }
