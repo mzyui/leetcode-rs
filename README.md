@@ -29,7 +29,6 @@ LeetCode problem per day.
 
 - [Problems 1-10](#problems-1-10)
 
----
 
 <a id="problems-1-10"></a>
 ## Problems 1-10
@@ -48,7 +47,6 @@ LeetCode problem per day.
 
 [Back to top](#leetcode-solutions-rust)
 
----
 
 ## Repository Structure
 
@@ -63,7 +61,6 @@ leetcode-rs/
 └── README.md         # Repository overview
 ```
 
----
 
 ## Tooling and Synchronization
 
@@ -77,7 +74,6 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 ./tools/sync_leetcode 100
 ```
 
----
 
 ## Scope and Design Goals
 
@@ -86,7 +82,6 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 - Deterministic, auto-generated documentation
 - Strong IDE support via rust-analyzer
 
----
 
 ## Notes
 
@@ -94,7 +89,6 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 - Files under `problems/` and `src/` are auto-generated
 - Manual edits to generated files will be overwritten
 
----
 
 ## Credits
 
@@ -103,7 +97,6 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode
 - Tooling (`sync_leetcode`) was developed with assistance from an AI language model (ChatGPT, GPT-5).
 
 
----
 
 ## Disclaimer
 
