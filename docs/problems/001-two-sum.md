@@ -49,7 +49,7 @@ You can return the answer in any order.
 - **-10**⁹ <= target <= **10**⁹
 - Only one valid answer *exists.*
 
-**Follow-up:** Can you come up with an algorithm that is less than O(n²) time complexity?
+**Follow-up:** Can you come up with an algorithm that is less than O(n²) time complexity?
 
 ---
 
