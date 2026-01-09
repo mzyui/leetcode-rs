@@ -45,7 +45,7 @@ You may assume the two numbers do not contain any leading zero, except the numbe
 - The number of nodes in each linked list is in the range [**1**, **100**].
 - **0** <= *Node.val* <= **9**
 - It is guaranteed that the list represents a number that does not have leading *zeros.*
-- Definition for singly-linked *list.*
+Definition for singly-linked list.
 
 ```rust
 #[derive(PartialEq, Eq, Clone, Debug)]
