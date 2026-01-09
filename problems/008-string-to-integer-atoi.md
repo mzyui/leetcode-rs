@@ -105,7 +105,8 @@ Return the integer as the final result.
 
 <div align="center">
 
-<small>← [Previous](../problems/007-reverse-integer.md) · [Back to index](../README.md) · [Next](../problems/009-palindrome-number.md) →
+<small>
+← [Previous](../problems/007-reverse-integer.md) · [Back to index](../README.md) · [Next](../problems/009-palindrome-number.md) →
 </small></div>
 
 ---

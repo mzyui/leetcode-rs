@@ -44,7 +44,8 @@ Given an integer x, return true if x is a palindrome, and false otherwise.
 
 <div align="center">
 
-<small>← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md)
+<small>
+← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md)
 </small></div>
 
 ---
