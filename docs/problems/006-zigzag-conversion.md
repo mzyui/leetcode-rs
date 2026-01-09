@@ -95,9 +95,9 @@ impl Solution {
 
 <div align="center">
 
-<small>
 ← [Previous](../problems/005-longest-palindromic-substring) · [Back to index](../) · [Next](../problems/007-reverse-integer) →
-</small></div>
+
+</div>
 
 ---
 

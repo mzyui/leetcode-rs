@@ -49,9 +49,9 @@ You can return the answer in any order.
 
 <div align="center">
 
-<small>
 · [Back to index](../README.md) · [Next](../problems/002-add-two-numbers.md) →
-</small></div>
+
+</div>
 
 ---
 

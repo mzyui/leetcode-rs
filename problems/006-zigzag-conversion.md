@@ -56,9 +56,9 @@ string convert(string s, int numRows);
 
 <div align="center">
 
-<small>
 ← [Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md) · [Next](../problems/007-reverse-integer.md) →
-</small></div>
+
+</div>
 
 ---
 

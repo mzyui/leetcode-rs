@@ -60,9 +60,9 @@ impl ListNode {
 
 <div align="center">
 
-<small>
 ← [Previous](../problems/001-two-sum.md) · [Back to index](../README.md) · [Next](../problems/003-longest-substring-without-repeating-characters.md) →
-</small></div>
+
+</div>
 
 ---
 

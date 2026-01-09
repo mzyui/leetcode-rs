@@ -36,9 +36,9 @@ Given a string s, return the longest palindromic substring in s.
 
 <div align="center">
 
-<small>
 ← [Previous](../problems/004-median-of-two-sorted-arrays.md) · [Back to index](../README.md) · [Next](../problems/006-zigzag-conversion.md) →
-</small></div>
+
+</div>
 
 ---
 

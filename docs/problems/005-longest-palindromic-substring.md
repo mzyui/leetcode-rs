@@ -86,9 +86,9 @@ impl Solution {
 
 <div align="center">
 
-<small>
 ← [Previous](../problems/004-median-of-two-sorted-arrays) · [Back to index](../) · [Next](../problems/006-zigzag-conversion) →
-</small></div>
+
+</div>
 
 ---
 

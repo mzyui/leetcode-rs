@@ -44,9 +44,9 @@ Given a string s, find the length of the longest substring without duplicate cha
 
 <div align="center">
 
-<small>
 ← [Previous](../problems/002-add-two-numbers.md) · [Back to index](../README.md) · [Next](../problems/004-median-of-two-sorted-arrays.md) →
-</small></div>
+
+</div>
 
 ---
 
