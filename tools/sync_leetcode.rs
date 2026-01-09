@@ -222,7 +222,7 @@ fn generate_problem_readmes(
             p.slug
         ));
 
-        out.push_str("---\n\n## Problem\n\n");
+        out.push_str("\n\n## Problem\n\n");
 
         let mut section = "problem";
         let mut example_idx = 0;
@@ -260,12 +260,12 @@ fn generate_problem_readmes(
                 }
 
                 if section != "examples" {
-                    out.push_str("\n---\n\n## Examples\n\n");
+                    out.push_str("\n\n## Examples\n\n");
                     section = "examples";
                 }
 
                 example_idx += 1;
-                out.push_str(&format!("### Example {}\n\n", example_idx));
+                out.push_str(&format!("#### Example {}\n\n", example_idx));
                 continue;
             }
 
@@ -279,7 +279,7 @@ fn generate_problem_readmes(
                     in_code = false;
                 }
 
-                out.push_str("\n---\n\n## Constraints\n\n");
+                out.push_str("\n\n## Constraints\n\n");
                 section = "constraints";
                 continue;
             }
@@ -349,7 +349,7 @@ fn generate_problem_readmes(
             out.push_str("```\n");
         }
 
-        out.push_str("\n---\n\n## Source / Solution\n\n");
+        out.push_str("\n\n## Source / Solution\n\n");
 
         match filetype {
             FileType::Readme => {
@@ -397,7 +397,7 @@ fn generate_problem_readmes(
 fn render_pagination(problems: &[Problem], index: usize, suffix: &str) -> String {
     let mut out = String::new();
 
-    out.push_str("\n---\n\n<small>");
+    out.push_str("\n\n<small>");
 
     if index > 0 {
         let p = &problems[index - 1];
@@ -668,7 +668,7 @@ LeetCode problem per day.\n\n",
     for (start, group) in &buckets {
         let end = start + bucket - 1;
         out.push_str(&format!(
-            "\n---\n\n<a id=\"problems-{}-{}\"></a>\n## Problems {}-{}\n\n",
+            "\n\n<a id=\"problems-{}-{}\"></a>\n## Problems {}-{}\n\n",
             start, end, start, end
         ));
         out.push_str("| # | Problem | Difficulty | Category |\n");
@@ -696,7 +696,7 @@ LeetCode problem per day.\n\n",
         out.push_str("\n[Back to top](#leetcode-solutions-rust)\n");
     }
 
-    out.push_str("\n---\n\n## Repository Structure\n\n");
+    out.push_str("\n\n## Repository Structure\n\n");
     out.push_str(
         "```text\n\
 leetcode-rs/\n\
@@ -710,7 +710,7 @@ leetcode-rs/\n\
 ```\n",
     );
 
-    out.push_str("\n---\n\n## Tooling and Synchronization\n\n");
+    out.push_str("\n\n## Tooling and Synchronization\n\n");
     out.push_str(
         "A custom synchronization tool (`sync_leetcode`) is used to keep solution\n\
 files, documentation, and metadata in sync.\n\n\
@@ -722,7 +722,7 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode\n\
 ```\n",
     );
 
-    out.push_str("\n---\n\n## Scope and Design Goals\n\n");
+    out.push_str("\n\n## Scope and Design Goals\n\n");
     out.push_str(
         "- Readable and idiomatic Rust solutions\n\
 - No execution or benchmarking\n\
@@ -730,21 +730,21 @@ rustc tools/sync_leetcode.rs -O -o tools/sync_leetcode\n\
 - Strong IDE support via rust-analyzer\n",
     );
 
-    out.push_str("\n---\n\n## Notes\n\n");
+    out.push_str("\n\n## Notes\n\n");
     out.push_str(
         "- `solutions/` is the single source of truth\n\
 - Files under `problems/` and `src/` are auto-generated\n\
 - Manual edits to generated files will be overwritten\n",
     );
 
-    out.push_str("\n---\n\n## Credits\n\n");
+    out.push_str("\n\n## Credits\n\n");
     out.push_str(
         "- LeetCode platform\n\
 - leetcode-cli by clearloop ([GitHub repository](https://github.com/clearloop/leetcode-cli))\n\
 - Tooling (`sync_leetcode`) was developed with assistance from an AI language model (ChatGPT, GPT-5).\n\n",
     );
 
-    out.push_str("\n---\n\n## Disclaimer\n\n");
+    out.push_str("\n\n## Disclaimer\n\n");
     out.push_str(
         "This repository is independently maintained and is not affiliated with, endorsed by,\n\
 or sponsored by LeetCode. All problem descriptions remain the property of their\n\
