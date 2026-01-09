@@ -10,35 +10,27 @@ title: Longest Palindromic Substring
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/longest-palindromic-substring/)
 
----
-
 ## Problem
 
 Given a string s, return the longest palindromic substring in s.
 
----
-
 ## Examples
 
-### Example 1
+#### Example 1
 
 - **Input:** s = "babad"
 - **Output:** "bab"
 - **Explanation:** "aba" is also a valid answer.
 
-### Example 2
+#### Example 2
 
 - **Input:** s = "cbbd"
 - **Output:** "bb"
-
----
 
 ## Constraints
 
 - **1** <= *s.length* <= **1000**
 - s consist of only digits and English *letters.*
-
----
 
 ## Source / Solution
 
@@ -89,8 +81,6 @@ impl Solution {
 {% endhighlight %}
 
 </details>
-
----
 
 <small>← [Previous](../problems/004-median-of-two-sorted-arrays) · [Back to index](../) · [Next](../problems/006-zigzag-conversion) →</small>
 

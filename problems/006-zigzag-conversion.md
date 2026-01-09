@@ -6,8 +6,6 @@
 
 **LeetCode:** [View on LeetCode](https://leetcode.com/problems/zigzag-conversion/)
 
----
-
 ## Problem
 
 The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
@@ -22,16 +20,14 @@ Write the code that will take a string and make this conversion given a number o
 
 string convert(string s, int numRows);
 
----
-
 ## Examples
 
-### Example 1
+#### Example 1
 
 - **Input:** s = "PAYPALISHIRING", numRows = 3
 - **Output:** "PAHNAPLSIIGYIR"
 
-### Example 2
+#### Example 2
 
 - **Input:** s = "PAYPALISHIRING", numRows = 4
 - **Output:** "PINALSIGYAHRPI"
@@ -41,12 +37,10 @@ string convert(string s, int numRows);
   Y A   H R\
   P     I
 
-### Example 3
+#### Example 3
 
 - **Input:** s = "A", numRows = 1
 - **Output:** "A"
-
----
 
 ## Constraints
 
@@ -54,13 +48,9 @@ string convert(string s, int numRows);
 - s consists of English letters (lower-case and upper-case), ',' and '.'.
 - **1** <= numRows <= **1000**
 
----
-
 ## Source / Solution
 
 [solutions/6.zigzag-conversion.rs](../solutions/6.zigzag-conversion.rs)
-
----
 
 <small>← [Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md) · [Next](../problems/007-reverse-integer.md) →</small>
 
