@@ -307,7 +307,7 @@ fn generate_problem_readmes(
                 if line.trim().to_lowercase().starts_with("follow") && line.contains(":") {
                     follow_up_line = Some(line.to_string());
                 } else {
-                    constraint_lines.push(line.to_string());
+                    constraint_lines.push(raw.to_string());
                 }
                 continue;
             }
@@ -323,12 +323,12 @@ fn generate_problem_readmes(
                     line.to_string()
                 };
 
-                if is_indented && section != "constraints" {
+                if is_indented && !rendered.starts_with("-") {
                     out.push_str(&format!("- {}", rendered));
                 } else {
                     out.push_str(&rendered);
 
-                    if !next_line.is_empty() {
+                    if !next_line.is_empty() && !rendered.starts_with("-") {
                         out.push('\\');
                     }
                 }
@@ -441,18 +441,14 @@ fn render_constraints(out: &mut String, constraints: &[String], follow_up: &Opti
         return;
     }
 
-    let listable = constraints.iter().all(|l| is_simple_constraint_line(l));
-
-    if listable {
-        for line in constraints {
-            let emphasized = emphasize_constraint_line(line);
+    for line in constraints {
+        if !is_simple_constraint_line(line) {
+            let emphasized = emphasize_constraint_line(line.trim());
             out.push_str("- ");
             out.push_str(&emphasized);
             out.push('\n');
-        }
-    } else {
-        for line in constraints {
-            out.push_str(line);
+        } else {
+            out.push_str(line.trim());
             out.push('\n');
         }
     }
