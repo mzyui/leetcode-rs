@@ -60,7 +60,12 @@ impl Solution {
 
 </details>
 
-<small>← [Previous](../problems/006-zigzag-conversion) · [Back to index](../) · [Next](../problems/008-string-to-integer-atoi) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/006-zigzag-conversion) · [Back to index](../) · [Next](../problems/008-string-to-integer-atoi) →
+</small></div>
 
 ---
 

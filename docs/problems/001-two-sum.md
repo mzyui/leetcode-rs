@@ -72,7 +72,12 @@ impl Solution {
 
 </details>
 
-<small>· [Back to index](../) · [Next](../problems/002-add-two-numbers) →</small>
+---
+
+<div align="center">
+
+<small>· [Back to index](../) · [Next](../problems/002-add-two-numbers) →
+</small></div>
 
 ---
 

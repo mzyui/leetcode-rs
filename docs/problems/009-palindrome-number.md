@@ -68,7 +68,12 @@ impl Solution {
 
 </details>
 
-<small>← [Previous](../problems/008-string-to-integer-atoi) · [Back to index](../)</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/008-string-to-integer-atoi) · [Back to index](../)
+</small></div>
 
 ---
 

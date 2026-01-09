@@ -37,7 +37,12 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 
 [solutions/7.reverse-integer.rs](../solutions/7.reverse-integer.rs)
 
-<small>← [Previous](../problems/006-zigzag-conversion.md) · [Back to index](../README.md) · [Next](../problems/008-string-to-integer-atoi.md) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/006-zigzag-conversion.md) · [Back to index](../README.md) · [Next](../problems/008-string-to-integer-atoi.md) →
+</small></div>
 
 ---
 

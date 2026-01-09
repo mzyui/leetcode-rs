@@ -52,7 +52,12 @@ string convert(string s, int numRows);
 
 [solutions/6.zigzag-conversion.rs](../solutions/6.zigzag-conversion.rs)
 
-<small>← [Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md) · [Next](../problems/007-reverse-integer.md) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/005-longest-palindromic-substring.md) · [Back to index](../README.md) · [Next](../problems/007-reverse-integer.md) →
+</small></div>
 
 ---
 

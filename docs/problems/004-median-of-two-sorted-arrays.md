@@ -67,7 +67,12 @@ impl Solution {
 
 </details>
 
-<small>← [Previous](../problems/003-longest-substring-without-repeating-characters) · [Back to index](../) · [Next](../problems/005-longest-palindromic-substring) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/003-longest-substring-without-repeating-characters) · [Back to index](../) · [Next](../problems/005-longest-palindromic-substring) →
+</small></div>
 
 ---
 

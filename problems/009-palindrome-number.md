@@ -40,7 +40,12 @@ Given an integer x, return true if x is a palindrome, and false otherwise.
 
 [solutions/9.palindrome-number.rs](../solutions/9.palindrome-number.rs)
 
-<small>← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md)</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md)
+</small></div>
 
 ---
 

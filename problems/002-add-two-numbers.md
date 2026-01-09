@@ -56,7 +56,12 @@ impl ListNode {
 
 [solutions/2.add-two-numbers.rs](../solutions/2.add-two-numbers.rs)
 
-<small>← [Previous](../problems/001-two-sum.md) · [Back to index](../README.md) · [Next](../problems/003-longest-substring-without-repeating-characters.md) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/001-two-sum.md) · [Back to index](../README.md) · [Next](../problems/003-longest-substring-without-repeating-characters.md) →
+</small></div>
 
 ---
 

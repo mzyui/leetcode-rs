@@ -96,7 +96,12 @@ impl Solution {
 
 </details>
 
-<small>← [Previous](../problems/001-two-sum) · [Back to index](../) · [Next](../problems/003-longest-substring-without-repeating-characters) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/001-two-sum) · [Back to index](../) · [Next](../problems/003-longest-substring-without-repeating-characters) →
+</small></div>
 
 ---
 

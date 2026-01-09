@@ -39,7 +39,12 @@ The overall run time complexity should be O(log (m+n)).
 
 [solutions/4.median-of-two-sorted-arrays.rs](../solutions/4.median-of-two-sorted-arrays.rs)
 
-<small>← [Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md) · [Next](../problems/005-longest-palindromic-substring.md) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/003-longest-substring-without-repeating-characters.md) · [Back to index](../README.md) · [Next](../problems/005-longest-palindromic-substring.md) →
+</small></div>
 
 ---
 

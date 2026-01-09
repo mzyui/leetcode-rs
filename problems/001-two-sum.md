@@ -45,7 +45,12 @@ You can return the answer in any order.
 
 [solutions/1.two-sum.rs](../solutions/1.two-sum.rs)
 
-<small>· [Back to index](../README.md) · [Next](../problems/002-add-two-numbers.md) →</small>
+---
+
+<div align="center">
+
+<small>· [Back to index](../README.md) · [Next](../problems/002-add-two-numbers.md) →
+</small></div>
 
 ---
 

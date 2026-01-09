@@ -101,7 +101,12 @@ Return the integer as the final result.
 
 [solutions/8.string-to-integer-atoi.rs](../solutions/8.string-to-integer-atoi.rs)
 
-<small>← [Previous](../problems/007-reverse-integer.md) · [Back to index](../README.md) · [Next](../problems/009-palindrome-number.md) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/007-reverse-integer.md) · [Back to index](../README.md) · [Next](../problems/009-palindrome-number.md) →
+</small></div>
 
 ---
 

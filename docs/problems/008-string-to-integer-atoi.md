@@ -149,7 +149,12 @@ impl Solution {
 
 </details>
 
-<small>← [Previous](../problems/007-reverse-integer) · [Back to index](../) · [Next](../problems/009-palindrome-number) →</small>
+---
+
+<div align="center">
+
+<small>← [Previous](../problems/007-reverse-integer) · [Back to index](../) · [Next](../problems/009-palindrome-number) →
+</small></div>
 
 ---
 
