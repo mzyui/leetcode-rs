@@ -74,11 +74,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 · [Back to index](../) · [Next](../problems/002-add-two-numbers) →
-
-</div>
 
 ---
 

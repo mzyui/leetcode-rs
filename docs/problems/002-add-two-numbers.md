@@ -98,11 +98,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/001-two-sum) · [Back to index](../) · [Next](../problems/003-longest-substring-without-repeating-characters) →
-
-</div>
 
 ---
 

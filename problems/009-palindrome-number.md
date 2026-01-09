@@ -42,11 +42,7 @@ Given an integer x, return true if x is a palindrome, and false otherwise.
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md)
-
-</div>
 
 ---
 

@@ -93,11 +93,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/005-longest-palindromic-substring) · [Back to index](../) · [Next](../problems/007-reverse-integer) →
-
-</div>
 
 ---
 

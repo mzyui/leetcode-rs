@@ -70,11 +70,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/008-string-to-integer-atoi) · [Back to index](../)
-
-</div>
 
 ---
 

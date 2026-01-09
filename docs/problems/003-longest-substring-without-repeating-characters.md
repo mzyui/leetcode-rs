@@ -73,11 +73,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/002-add-two-numbers) · [Back to index](../) · [Next](../problems/004-median-of-two-sorted-arrays) →
-
-</div>
 
 ---
 

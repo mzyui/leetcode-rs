@@ -69,11 +69,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/003-longest-substring-without-repeating-characters) · [Back to index](../) · [Next](../problems/005-longest-palindromic-substring) →
-
-</div>
 
 ---
 

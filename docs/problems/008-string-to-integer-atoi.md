@@ -151,11 +151,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/007-reverse-integer) · [Back to index](../) · [Next](../problems/009-palindrome-number) →
-
-</div>
 
 ---
 

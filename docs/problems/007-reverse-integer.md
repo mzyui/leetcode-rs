@@ -62,11 +62,7 @@ impl Solution {
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/006-zigzag-conversion) · [Back to index](../) · [Next](../problems/008-string-to-integer-atoi) →
-
-</div>
 
 ---
 

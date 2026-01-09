@@ -39,11 +39,7 @@ Assume the environment does not allow you to store 64-bit integers (signed or un
 
 ---
 
-<div align="center">
-
 ← [Previous](../problems/006-zigzag-conversion.md) · [Back to index](../README.md) · [Next](../problems/008-string-to-integer-atoi.md) →
-
-</div>
 
 ---
 
