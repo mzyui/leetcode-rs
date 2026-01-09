@@ -813,13 +813,13 @@ fn lint_markdown(input: &str) -> String {
 
 fn emphasize_example_labels(line: &str) -> String {
     if let Some(rest) = line.strip_prefix("Input:") {
-        format!("**Input:**{}", rest)
+        format!("- **Input:**{}", rest)
     } else if let Some(rest) = line.strip_prefix("Output:") {
-        format!("**Output:**{}", rest)
+        format!("- **Output:**{}", rest)
     } else if let Some(rest) = line.strip_prefix("Explanation:") {
-        format!("**Explanation:**{}", rest)
+        format!("- **Explanation:**{}", rest)
     } else {
-        line.to_string()
+        format!("  {line}")
     }
 }
 
