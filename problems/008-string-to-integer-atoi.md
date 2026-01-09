@@ -111,7 +111,7 @@ Reading stops at the first non-digit character 'w'.
 
 ---
 
-<small>← [Previous](../problems/007-reverse-integer.md) · [Back to index](../README.md)</small>
+<small>← [Previous](../problems/007-reverse-integer.md) · [Back to index](../README.md) · [Next](../problems/009-palindrome-number.md) →</small>
 
 ---
 

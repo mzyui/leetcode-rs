@@ -159,7 +159,7 @@ impl Solution {
 
 ---
 
-<small>← [Previous](../problems/007-reverse-integer) · [Back to index](../)</small>
+<small>← [Previous](../problems/007-reverse-integer) · [Back to index](../) · [Next](../problems/009-palindrome-number) →</small>
 
 ---
 
