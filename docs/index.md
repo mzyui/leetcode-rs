@@ -16,13 +16,13 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 9
+**Total Problems Solved:** 10
 
 | Difficulty | Count |
 |------------|-------|
 | Easy       | 2     |
 | Medium     | 6     |
-| Hard       | 1     |
+| Hard       | 2     |
 
 > This is a documentation-focused repository.  
 > Individual problems are documented in detail under the `problems/` directory.
@@ -48,6 +48,7 @@ LeetCode problem per day.
 | 7 | [Reverse Integer](problems/007-reverse-integer) | Medium | algorithms |
 | 8 | [String To Integer Atoi](problems/008-string-to-integer-atoi) | Medium | algorithms |
 | 9 | [Palindrome Number](problems/009-palindrome-number) | Easy | algorithms |
+| 10 | [Regular Expression Matching](problems/010-regular-expression-matching) | Hard | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 

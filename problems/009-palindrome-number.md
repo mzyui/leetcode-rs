@@ -42,7 +42,7 @@ Given an integer x, return true if x is a palindrome, and false otherwise.
 
 ---
 
-← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md)
+← [Previous](../problems/008-string-to-integer-atoi.md) · [Back to index](../README.md) · [Next](../problems/010-regular-expression-matching.md) →
 
 ---
 

@@ -397,7 +397,7 @@ fn generate_problem_readmes(
 fn render_pagination(problems: &[Problem], index: usize, suffix: &str) -> String {
     let mut out = String::new();
 
-    out.push_str("\n\n<small>");
+    out.push_str("\n---\n\n");
 
     if index > 0 {
         let p = &problems[index - 1];
@@ -431,7 +431,7 @@ fn render_pagination(problems: &[Problem], index: usize, suffix: &str) -> String
         );
     }
 
-    out.push_str("</small>\n");
+    out.push_str("\n\n");
 
     out
 }

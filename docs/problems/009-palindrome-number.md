@@ -70,7 +70,7 @@ impl Solution {
 
 ---
 
-← [Previous](../problems/008-string-to-integer-atoi) · [Back to index](../)
+← [Previous](../problems/008-string-to-integer-atoi) · [Back to index](../) · [Next](../problems/010-regular-expression-matching) →
 
 ---
 
