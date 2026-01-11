@@ -16,12 +16,12 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 10
+**Total Problems Solved:** 11
 
 | Difficulty | Count |
 |------------|-------|
 | Easy       | 2     |
-| Medium     | 6     |
+| Medium     | 7     |
 | Hard       | 2     |
 
 > This is a documentation-focused repository.  
@@ -32,6 +32,7 @@ LeetCode problem per day.
 ## Quick Navigation
 
 - [Problems 1-10](#problems-1-10)
+- [Problems 11-20](#problems-11-20)
 
 
 <a id="problems-1-10"></a>
@@ -49,6 +50,16 @@ LeetCode problem per day.
 | 8 | [String To Integer Atoi](problems/008-string-to-integer-atoi) | Medium | algorithms |
 | 9 | [Palindrome Number](problems/009-palindrome-number) | Easy | algorithms |
 | 10 | [Regular Expression Matching](problems/010-regular-expression-matching) | Hard | algorithms |
+
+[Back to top](#leetcode-solutions-rust)
+
+
+<a id="problems-11-20"></a>
+## Problems 11-20
+
+| # | Problem | Difficulty | Category |
+|---|--------|------------|----------|
+| 11 | [Container With Most Water](problems/011-container-with-most-water) | Medium | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 

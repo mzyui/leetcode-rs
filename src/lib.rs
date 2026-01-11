@@ -19,4 +19,5 @@ mod solutions {
     include!("../solutions/8.string-to-integer-atoi.rs");
     include!("../solutions/9.palindrome-number.rs");
     include!("../solutions/10.regular-expression-matching.rs");
+    include!("../solutions/11.container-with-most-water.rs");
 }
