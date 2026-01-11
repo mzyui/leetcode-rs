@@ -96,7 +96,7 @@ impl Solution {
 
 ---
 
-← [Previous](../problems/009-palindrome-number) · [Back to index](../)
+← [Previous](../problems/009-palindrome-number) · [Back to index](../) · [Next](../problems/011-container-with-most-water) →
 
 ---
 
