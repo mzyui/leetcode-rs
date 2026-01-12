@@ -20,4 +20,5 @@ mod solutions {
     include!("../solutions/9.palindrome-number.rs");
     include!("../solutions/10.regular-expression-matching.rs");
     include!("../solutions/11.container-with-most-water.rs");
+    include!("../solutions/12.integer-to-roman.rs");
 }
