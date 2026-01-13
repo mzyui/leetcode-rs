@@ -16,13 +16,13 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 12
+**Total Problems Solved:** 0
 
 | Difficulty | Count |
 |------------|-------|
-| Easy       | 2     |
-| Medium     | 8     |
-| Hard       | 2     |
+| Easy       | 0     |
+| Medium     | 0     |
+| Hard       | 0     |
 
 > This is a documentation-focused repository.  
 > Individual problems are documented in detail under the `problems/` directory.
@@ -31,38 +31,6 @@ LeetCode problem per day.
 
 ## Quick Navigation
 
-- [Problems 1-10](#problems-1-10)
-- [Problems 11-20](#problems-11-20)
-
-
-<a id="problems-1-10"></a>
-## Problems 1-10
-
-| # | Problem | Difficulty | Category |
-|---|--------|------------|----------|
-| 1 | [Two Sum](problems/001-two-sum) | Easy | algorithms |
-| 2 | [Add Two Numbers](problems/002-add-two-numbers) | Medium | algorithms |
-| 3 | [Longest Substring Without Repeating Characters](problems/003-longest-substring-without-repeating-characters) | Medium | algorithms |
-| 4 | [Median Of Two Sorted Arrays](problems/004-median-of-two-sorted-arrays) | Hard | algorithms |
-| 5 | [Longest Palindromic Substring](problems/005-longest-palindromic-substring) | Medium | algorithms |
-| 6 | [Zigzag Conversion](problems/006-zigzag-conversion) | Medium | algorithms |
-| 7 | [Reverse Integer](problems/007-reverse-integer) | Medium | algorithms |
-| 8 | [String To Integer Atoi](problems/008-string-to-integer-atoi) | Medium | algorithms |
-| 9 | [Palindrome Number](problems/009-palindrome-number) | Easy | algorithms |
-| 10 | [Regular Expression Matching](problems/010-regular-expression-matching) | Hard | algorithms |
-
-[Back to top](#leetcode-solutions-rust)
-
-
-<a id="problems-11-20"></a>
-## Problems 11-20
-
-| # | Problem | Difficulty | Category |
-|---|--------|------------|----------|
-| 11 | [Container With Most Water](problems/011-container-with-most-water) | Medium | algorithms |
-| 12 | [Integer To Roman](problems/012-integer-to-roman) | Medium | algorithms |
-
-[Back to top](#leetcode-solutions-rust)
 
 
 ## Repository Structure
