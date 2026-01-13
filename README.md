@@ -8,8 +8,6 @@ with a focus on clarity, correctness, and maintainable documentation.
 The repository is updated daily as part of a personal challenge to solve one
 LeetCode problem per day.
 
-> A browsable web version of this repository is available on the [project website](https://mzyui.github.io/leetcode-rs/).
-
 ## Statistics
 
 **Total Problems Solved:** 0
