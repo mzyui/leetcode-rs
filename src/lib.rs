@@ -9,16 +9,4 @@
 #![allow(non_snake_case)]
 
 mod solutions {
-    include!("../solutions/1.two-sum.rs");
-    include!("../solutions/2.add-two-numbers.rs");
-    include!("../solutions/3.longest-substring-without-repeating-characters.rs");
-    include!("../solutions/4.median-of-two-sorted-arrays.rs");
-    include!("../solutions/5.longest-palindromic-substring.rs");
-    include!("../solutions/6.zigzag-conversion.rs");
-    include!("../solutions/7.reverse-integer.rs");
-    include!("../solutions/8.string-to-integer-atoi.rs");
-    include!("../solutions/9.palindrome-number.rs");
-    include!("../solutions/10.regular-expression-matching.rs");
-    include!("../solutions/11.container-with-most-water.rs");
-    include!("../solutions/12.integer-to-roman.rs");
 }

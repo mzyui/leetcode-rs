@@ -12,13 +12,13 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 12
+**Total Problems Solved:** 0
 
 | Difficulty | Count |
 |------------|-------|
-| Easy       | 2     |
-| Medium     | 8     |
-| Hard       | 2     |
+| Easy       | 0     |
+| Medium     | 0     |
+| Hard       | 0     |
 
 > This is a documentation-focused repository.  
 > Individual problems are documented in detail under the `problems/` directory.
@@ -27,38 +27,6 @@ LeetCode problem per day.
 
 ## Quick Navigation
 
-- [Problems 1-10](#problems-1-10)
-- [Problems 11-20](#problems-11-20)
-
-
-<a id="problems-1-10"></a>
-## Problems 1-10
-
-| # | Problem | Difficulty | Category |
-|---|--------|------------|----------|
-| 1 | [Two Sum](problems/001-two-sum.md) | Easy | algorithms |
-| 2 | [Add Two Numbers](problems/002-add-two-numbers.md) | Medium | algorithms |
-| 3 | [Longest Substring Without Repeating Characters](problems/003-longest-substring-without-repeating-characters.md) | Medium | algorithms |
-| 4 | [Median Of Two Sorted Arrays](problems/004-median-of-two-sorted-arrays.md) | Hard | algorithms |
-| 5 | [Longest Palindromic Substring](problems/005-longest-palindromic-substring.md) | Medium | algorithms |
-| 6 | [Zigzag Conversion](problems/006-zigzag-conversion.md) | Medium | algorithms |
-| 7 | [Reverse Integer](problems/007-reverse-integer.md) | Medium | algorithms |
-| 8 | [String To Integer Atoi](problems/008-string-to-integer-atoi.md) | Medium | algorithms |
-| 9 | [Palindrome Number](problems/009-palindrome-number.md) | Easy | algorithms |
-| 10 | [Regular Expression Matching](problems/010-regular-expression-matching.md) | Hard | algorithms |
-
-[Back to top](#leetcode-solutions-rust)
-
-
-<a id="problems-11-20"></a>
-## Problems 11-20
-
-| # | Problem | Difficulty | Category |
-|---|--------|------------|----------|
-| 11 | [Container With Most Water](problems/011-container-with-most-water.md) | Medium | algorithms |
-| 12 | [Integer To Roman](problems/012-integer-to-roman.md) | Medium | algorithms |
-
-[Back to top](#leetcode-solutions-rust)
 
 
 ## Repository Structure
