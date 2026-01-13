@@ -1,0 +1,18 @@
+[code]
+editor = 'vim'
+lang = 'rust'
+edit_code_marker = false
+comment_problem_desc = true
+comment_leading = "//"
+test = true
+
+[cookies]
+csrf = '<CSRFTOKEN>'
+session = '<LEETCODE_SESSION>'
+site = "leetcode.com"
+
+[storage]
+cache = 'Problems'
+code = 'solutions'
+root = '~/leetcode-rs'
+scripts = 'scripts'
