@@ -2,6 +2,9 @@
 
 # LeetCode Solutions (Rust)
 
+> [!WARNING]
+>  Read `TEMPLATE.md` before using this repository.
+
 This repository contains a curated collection of LeetCode solutions written in Rust,
 with a focus on clarity, correctness, and maintainable documentation.
 
