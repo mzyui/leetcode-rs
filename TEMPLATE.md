@@ -32,13 +32,13 @@ site = "leetcode.com"
 editor = "vim"
 ```
 
-Replace <CSRFTOKEN> and <LEETCODE_SESSION> with your own LeetCode cookies.
+Replace `<CSRFTOKEN>` and `<LEETCODE_SESSION>` with your own LeetCode cookies.
 Change editor to the text editor you use.
 
 After finishing the edits, move leetcode.toml to:
 
 ```text
-$HOME/.Leetcode/leetcode.toml
+$HOME/.leetcode/leetcode.toml
 ```
 
 No other fields need to be changed.
@@ -47,8 +47,8 @@ No other fields need to be changed.
 
 If you enable GitHub Pages, update the following constant:
 
-- File: tools/sync_leetcode.rs
-- Constant: GITHUB_PAGES_URL
+- File: `tools/sync_leetcode.rs`
+- Constant: `GITHUB_PAGES_URL`
 
 Set it to your own GitHub Pages URL.
 If you do not use GitHub Pages, leave it empty.
