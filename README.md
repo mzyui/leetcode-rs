@@ -12,11 +12,11 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 12
+**Total Problems Solved:** 13
 
 | Difficulty | Count |
 |------------|-------|
-| Easy       | 2     |
+| Easy       | 3     |
 | Medium     | 8     |
 | Hard       | 2     |
 
@@ -57,6 +57,7 @@ LeetCode problem per day.
 |---|--------|------------|----------|
 | 11 | [Container With Most Water](problems/011-container-with-most-water.md) | Medium | algorithms |
 | 12 | [Integer To Roman](problems/012-integer-to-roman.md) | Medium | algorithms |
+| 13 | [Roman To Integer](problems/013-roman-to-integer.md) | Easy | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 
