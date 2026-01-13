@@ -35,6 +35,12 @@ editor = "vim"
 Replace <CSRFTOKEN> and <LEETCODE_SESSION> with your own LeetCode cookies.
 Change editor to the text editor you use.
 
+After finishing the edits, move leetcode.toml to:
+
+```text
+$HOME/.Leetcode/leetcode.toml
+```
+
 No other fields need to be changed.
 
 ### 2. GitHub Pages (Optional)
