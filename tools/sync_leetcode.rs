@@ -9,7 +9,7 @@ use std::{
 
 // replace with your github pages url
 const GITHUB_PAGES_URL: &str = "https://mzyui.github.io/leetcode-rs/";
-const BRANCH: &str = "main";
+const BRANCH: &str = "progress";
 
 fn format_with_rustfmt(code: &str) -> String {
     let mut child = match Command::new("rustfmt")

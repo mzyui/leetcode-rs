@@ -12,7 +12,7 @@ with a focus on clarity, correctness, and maintainable documentation.
 The site is updated daily as part of a personal challenge to solve one
 LeetCode problem per day.
 
-> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs/tree/main).
+> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs/tree/progress).
 
 ## Statistics
 
