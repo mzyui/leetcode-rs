@@ -7,6 +7,9 @@ use std::{
     path::PathBuf,
 };
 
+// replace with your github pages url
+const GITHUB_PAGES_URL: &str = "https://mzyui.github.io/leetcode-rs/";
+
 fn format_with_rustfmt(code: &str) -> String {
     let mut child = match Command::new("rustfmt")
         .arg("--emit=stdout")
@@ -626,9 +629,11 @@ LeetCode problem per day.\n\n",
     ));
 
     if filetype == FileType::Readme {
-        out.push_str(
-            "> A browsable web version of this repository is available on the [project website](https://mzyui.github.io/leetcode-rs/).\n\n"
-        );
+        if !GITHUB_PAGES_URL.is_empty() {
+            out.push_str(&format!(
+                "> A browsable web version of this repository is available on the [project website]({}/).\n\n", GITHUB_PAGES_URL)
+            );
+        }
     } else {
         out.push_str(
             "> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs).\n\n"
