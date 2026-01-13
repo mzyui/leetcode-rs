@@ -9,6 +9,7 @@ use std::{
 
 // replace with your github pages url
 const GITHUB_PAGES_URL: &str = "https://mzyui.github.io/leetcode-rs/";
+const BRANCH: &str = "main";
 
 fn format_with_rustfmt(code: &str) -> String {
     let mut child = match Command::new("rustfmt")
@@ -635,8 +636,8 @@ LeetCode problem per day.\n\n",
             );
         }
     } else {
-        out.push_str(
-            "> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs).\n\n"
+        out.push_str(&format!(
+            "> This website is a rendered view of the [GitHub repository](https://github.com/mzyui/leetcode-rs/tree/{}).\n\n", BRANCH)
         );
     }
 
