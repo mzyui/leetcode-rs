@@ -7,7 +7,8 @@ use std::{
     path::PathBuf,
 };
 
-const GITHUB_PAGES_URL: &str = "https://mzyui.github.io/leetcode-rs/";
+// replace with your github pages url
+const GITHUB_PAGES_URL: &str = "";
 
 fn format_with_rustfmt(code: &str) -> String {
     let mut child = match Command::new("rustfmt")
