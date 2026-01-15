@@ -23,4 +23,5 @@ mod solutions {
     include!("../solutions/12.integer-to-roman.rs");
     include!("../solutions/13.roman-to-integer.rs");
     include!("../solutions/14.longest-common-prefix.rs");
+    include!("../solutions/15.3sum.rs");
 }

@@ -12,12 +12,12 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 14
+**Total Problems Solved:** 15
 
 | Difficulty | Count |
 |------------|-------|
 | Easy       | 4     |
-| Medium     | 8     |
+| Medium     | 9     |
 | Hard       | 2     |
 
 > This is a documentation-focused repository.  
@@ -59,6 +59,7 @@ LeetCode problem per day.
 | 12 | [Integer To Roman](problems/012-integer-to-roman.md) | Medium | algorithms |
 | 13 | [Roman To Integer](problems/013-roman-to-integer.md) | Easy | algorithms |
 | 14 | [Longest Common Prefix](problems/014-longest-common-prefix.md) | Easy | algorithms |
+| 15 | [3sum](problems/015-3sum.md) | Medium | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 
