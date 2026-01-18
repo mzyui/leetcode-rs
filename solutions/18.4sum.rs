@@ -1,0 +1,91 @@
+// Category: algorithms
+// Level: Medium
+// Percent: 39.658283%
+
+
+
+// Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+// 
+// 
+// 	0 <= a, b, c, d < n
+// 	a, b, c, and d are distinct.
+// 	nums[a] + nums[b] + nums[c] + nums[d] == target
+// 
+// 
+// You may return the answer in any order.
+// 
+//  
+// Example 1:
+// 
+// Input: nums = [1,0,-1,0,-2,2], target = 0
+// Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+// 
+// 
+// Example 2:
+// 
+// Input: nums = [2,2,2,2,2], target = 8
+// Output: [[2,2,2,2]]
+// 
+// 
+//  
+// Constraints:
+// 
+// 
+// 	1 <= nums.length <= 200
+// 	-10⁹ <= nums[i] <= 10⁹
+// 	-10⁹ <= target <= 10⁹
+// 
+ 
+impl Solution {
+    pub fn four_sum(mut nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        let n = nums.len();
+        let mut res = Vec::new();
+        if n < 4 {
+            return res;
+        }
+
+        nums.sort_unstable();
+
+        for i in 0..n - 3 {
+            if i > 0 && nums[i] == nums[i - 1] {
+                continue;
+            }
+
+            for j in i + 1..n - 2 {
+                if j > i + 1 && nums[j] == nums[j - 1] {
+                    continue;
+                }
+
+                let mut l = j + 1;
+                let mut r = n - 1;
+
+                while l < r {
+                    let sum =
+                        nums[i] as i64 +
+                        nums[j] as i64 +
+                        nums[l] as i64 +
+                        nums[r] as i64;
+
+                    if sum == target as i64 {
+                        res.push(vec![nums[i], nums[j], nums[l], nums[r]]);
+                        l += 1;
+                        r -= 1;
+
+                        while l < r && nums[l] == nums[l - 1] {
+                            l += 1;
+                        }
+                        while l < r && nums[r] == nums[r + 1] {
+                            r -= 1;
+                        }
+                    } else if sum < target as i64 {
+                        l += 1;
+                    } else {
+                        r -= 1;
+                    }
+                }
+            }
+        }
+
+        res
+    }
+}

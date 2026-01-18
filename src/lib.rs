@@ -25,4 +25,6 @@ mod solutions {
     include!("../solutions/14.longest-common-prefix.rs");
     include!("../solutions/15.3sum.rs");
     include!("../solutions/16.3sum-closest.rs");
+    include!("../solutions/17.letter-combinations-of-a-phone-number.rs");
+    include!("../solutions/18.4sum.rs");
 }
