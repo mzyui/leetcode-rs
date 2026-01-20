@@ -16,12 +16,12 @@ LeetCode problem per day.
 
 ## Statistics
 
-**Total Problems Solved:** 18
+**Total Problems Solved:** 20
 
 | Difficulty | Count |
 |------------|-------|
-| Easy       | 4     |
-| Medium     | 12     |
+| Easy       | 5     |
+| Medium     | 13     |
 | Hard       | 2     |
 
 > This is a documentation-focused repository.  
@@ -67,6 +67,8 @@ LeetCode problem per day.
 | 16 | [3sum Closest](problems/016-3sum-closest) | Medium | algorithms |
 | 17 | [Letter Combinations Of A Phone Number](problems/017-letter-combinations-of-a-phone-number) | Medium | algorithms |
 | 18 | [4sum](problems/018-4sum) | Medium | algorithms |
+| 19 | [Remove Nth Node From End Of List](problems/019-remove-nth-node-from-end-of-list) | Medium | algorithms |
+| 20 | [Valid Parentheses](problems/020-valid-parentheses) | Easy | algorithms |
 
 [Back to top](#leetcode-solutions-rust)
 

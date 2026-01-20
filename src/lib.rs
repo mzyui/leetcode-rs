@@ -27,4 +27,6 @@ mod solutions {
     include!("../solutions/16.3sum-closest.rs");
     include!("../solutions/17.letter-combinations-of-a-phone-number.rs");
     include!("../solutions/18.4sum.rs");
+    include!("../solutions/19.remove-nth-node-from-end-of-list.rs");
+    include!("../solutions/20.valid-parentheses.rs");
 }
